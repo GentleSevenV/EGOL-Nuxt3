@@ -22,13 +22,13 @@
             </template>
 
             <el-menu-item>
-                <Icon class="icon-phone" name="icons:phone" /> 400-0519-889
+                <Icon class="icon-phone" name="icons:phone" /> 400-057-9889
             </el-menu-item>
         </el-menu>
     </div>
 </template>
 
-<script lang="js" setup>
+<script lang="ts" setup>
 const activeIndex = ref("");
 
 // 获取到当前激活的路由对象,并且将当前的路由对象赋值给激活的el-menu,这样即可保证刷新页面时依旧保持当前路由
@@ -44,7 +44,18 @@ watch(
     { immediate: true }
 );
 
-const navArr = ref([]);
+interface INavType {
+    id: number;
+    typeId: number;
+    name: string;
+    value: string;
+    orderNum: number;
+    parentId: null | number;
+    subNav?: INavType[];
+}
+
+const navArr = ref<INavType[]>([]);
+
 const res = await PostApi("/open/dict/info/data", {
     body: { types: ["headnav"] },
 });
@@ -55,10 +66,10 @@ const headnav = res.data.headnav;
 // console.log(headnav);
 
 // 2.定义二级导航变量
-let subNavData = [];
+let subNavData: INavType[] = [];
 
 // 3.从所有导航数据中，分离出一级导航和二级导航
-const navData = headnav.filter((item) => {
+const navData = headnav.filter((item: INavType) => {
     if (!item.parentId) {
         item.subNav = [];
         return item;
@@ -92,7 +103,7 @@ navArr.value = navData;
 }
 
 .el-menu--horizontal {
-    --el-menu-horizontal-height: 96px;
+    --el-menu-horizontal-height: 90px;
     --el-menu-item-font-size: 16px;
     border-bottom: none;
     width: 1010px;
