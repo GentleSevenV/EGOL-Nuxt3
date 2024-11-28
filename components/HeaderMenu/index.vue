@@ -5,17 +5,24 @@
             <!-- <div class="flex-grow" /> -->
             <template v-for="item in navArr" :key="item.id">
                 <template v-if="item.subNav?.length == 0">
-                    <el-menu-item :index="item.value">
-                        {{ item.name }}
-                    </el-menu-item>
+                    <template v-if="item.value.startsWith('http')">
+                        <el-menu-item index="">
+                            <a class="httplink" :href="item.value" target="_blank">{{ item.name }}</a>
+                        </el-menu-item>
+                    </template>
+                    <template v-else>
+                        <el-menu-item :index="item.value">
+                            {{ item.name }}
+                        </el-menu-item>
+                    </template>
                 </template>
                 <template v-else>
                     <el-sub-menu :index="item.value">
                         <template #title>{{ item.name }}</template>
                         <template v-for="subitem in item.subNav" :key="subitem.id">
-                            <el-menu-item :index="subitem.value">{{
-                                subitem.name
-                            }}</el-menu-item>
+                            <el-menu-item :index="subitem.value">
+                                {{ subitem.name }}
+                            </el-menu-item>
                         </template>
                     </el-sub-menu>
                 </template>
@@ -94,6 +101,10 @@ navArr.value = navData;
 .nav {
     padding-left: 28px;
     width: 1038px;
+
+    .httplink {
+        text-decoration: none;
+    }
 
     .icon-phone {
         font-size: 18px;

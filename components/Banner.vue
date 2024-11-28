@@ -2,7 +2,7 @@
     <ClientOnly>
         <swiper-container ref="containerRef" :init="false">
             <swiper-slide v-for="item in props.banners" :key="item.id">
-                <img class="swiper-img" :src="item.desktopImage" />
+                <img class="swiper-img" :src="item.pcImage" />
             </swiper-slide>
         </swiper-container>
     </ClientOnly>
@@ -14,7 +14,7 @@ interface IBannerType {
     id: number;
     title: string;
     link: string;
-    desktopImage: string;
+    pcImage: string;
 }
 const props = defineProps({
     banners: {

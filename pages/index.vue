@@ -11,14 +11,14 @@ interface IBannerType {
     id: number;
     title: string;
     link: string;
-    desktopImage: string;
+    pcImage: string;
 }
 
 const banners = ref<IBannerType[]>([]);
-const { data } = await PostApi("/open/banner/banner/list", {
+const { data } = await PostApi("/open/banner/info/list", {
     body: {
         status: 1,
-        type: 46,
+        type: 31,
     }
 });
 
