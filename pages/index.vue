@@ -32,7 +32,7 @@
           <h1>产品展示</h1>
           <div>
             <ClientOnly>
-              <swiper-container ref="containerRef">
+              <swiper-container ref="containerRef" :init="false">
                 <swiper-slide class="rec-product" v-for="item in recProducts?.data" :key="item.id">
                   <div class="product-infos">
                     <h3>{{ item.name }}</h3>
@@ -41,7 +41,7 @@
                       <span>{{ label }}</span>
                     </template>
                     <div class="probtn">
-                      <NuxtLink class="more" to="/about/brandintro">了解更多</NuxtLink>
+                      <NuxtLink class="more" :to="`/products/${item.id}`">了解更多</NuxtLink>
                     </div>
                   </div>
                   <img class="product-img" :src="item.coverImage" />
@@ -91,11 +91,73 @@
         <div class="layout">
           <h1>资讯中心</h1>
           <div>
-            <el-tabs v-model="activeName" class="demo-tabs">
-              <el-tab-pane label="User" name="first">User</el-tab-pane>
-              <el-tab-pane label="Config" name="second">Config</el-tab-pane>
-              <el-tab-pane label="Role" name="third">Role</el-tab-pane>
-              <el-tab-pane label="Task" name="fourth">Task</el-tab-pane>
+            <el-tabs v-model="activeName" type="card" class="news-tabs">
+              <el-tab-pane label="品牌资讯" name="first">
+                <div class="news-list">
+                  <template v-for="item in brandnews" :key="item.id">
+                    <NuxtLink :to="`/news/${item.id}`">
+                      <div class="news-item">
+                        <img :src="item.coverImage" />
+                        <span class="news-time">{{ item.createTime.slice(0, 11) }}</span>
+                        <div class="news-info">
+                          <h5>{{ item.title }}</h5>
+                          <p>
+                            {{ item.description }}
+                          </p>
+                          <div class="readmore">
+                            <Icon class="icon-play" name="icons:play" />
+                            阅读更多
+                          </div>
+                        </div>
+                      </div>
+                    </NuxtLink>
+                  </template>
+                </div>
+              </el-tab-pane>
+              <el-tab-pane label="行业资讯" name="second">
+                <div class="news-list">
+                  <template v-for="item in indstynews" :key="item.id">
+                    <NuxtLink :to="`/news/${item.id}`">
+                      <div class="news-item">
+                        <img :src="item.coverImage" />
+                        <span class="news-time">{{ item.createTime.slice(0, 11) }}</span>
+                        <div class="news-info">
+                          <h5>{{ item.title }}</h5>
+                          <p>
+                            {{ item.description }}
+                          </p>
+                          <div class="readmore">
+                            <Icon class="icon-play" name="icons:play" />
+                            阅读更多
+                          </div>
+                        </div>
+                      </div>
+                    </NuxtLink>
+                  </template>
+                </div>
+              </el-tab-pane>
+              <el-tab-pane label="精彩活动" name="third">
+                <div class="news-list">
+                  <template v-for="item in activitynews" :key="item.id">
+                    <NuxtLink :to="`/news/${item.id}`">
+                      <div class="news-item">
+                        <img :src="item.coverImage" />
+                        <span class="news-time">{{ item.createTime.slice(0, 11) }}</span>
+                        <div class="news-info">
+                          <h5>{{ item.title }}</h5>
+                          <p>
+                            {{ item.description }}
+                          </p>
+                          <div class="readmore">
+                            <Icon class="icon-play" name="icons:play" />
+                            阅读更多
+                          </div>
+                        </div>
+                      </div>
+                    </NuxtLink>
+                  </template>
+                </div>
+              </el-tab-pane>
             </el-tabs>
           </div>
         </div>
@@ -169,17 +231,36 @@ const { data: terminalImages } = await useFetch<DataResponse<ITerminalImage[]>>(
 
 const activeName = ref("first");
 
-// interface INewsType {
-//   id: string;
-//   name: string;
-//   value: string;
-// }
+interface INewsType {
+  id: number;
+  title: string;
+  description: string;
+  coverImage: string;
+  createTime: string;
+}
 
-// const data3 = await useFetch<DataResponse<INewsType[]>>("/open/dict/info/data", {
-//   method: "post",
-//   body: { types: ["news"] },
-// });
-// console.log(data3);
+const brandnews = ref<INewsType[] | null>(null);
+const indstynews = ref<INewsType[] | null>(null);
+const activitynews = ref<INewsType[] | null>(null);
+
+const [{ data: res1 }, { data: res2 }, { data: res3 }] = await Promise.all([
+  useFetch<DataResponse<INewsType[]>>("/open/news/info/list", {
+    method: "post",
+    body: { category: 0, page: 1, size: 3 },
+  }),
+  useFetch<DataResponse<INewsType[]>>("/open/news/info/list", {
+    method: "post",
+    body: { category: 1, page: 1, size: 3 },
+  }),
+  useFetch<DataResponse<INewsType[]>>("/open/news/info/list", {
+    method: "post",
+    body: { category: 2, page: 1, size: 3 },
+  }),
+]);
+
+brandnews.value = res1.value?.data || [];
+indstynews.value = res2.value?.data || [];
+activitynews.value = res3.value?.data || [];
 </script>
 <style lang="less" scoped>
 .egol-page {
@@ -261,9 +342,8 @@ const activeName = ref("first");
   }
 
   .products {
-    height: 726px;
     background: url(/images/product_bg.jpg) top center no-repeat;
-    background-size: cover;
+    background-size: 100% 100%;
 
     h1 {
       color: #fff;
@@ -334,8 +414,7 @@ const activeName = ref("first");
 
   .terminal-image {
     background: url(/images/shopbg.jpg) top center no-repeat;
-    background-size: cover;
-    height: 888px;
+    background-size: 100% 100%;
 
     h1 {
       text-align: center;
@@ -458,12 +537,139 @@ const activeName = ref("first");
 
   .news {
     background: url(/images/newsbg.jpg) top center no-repeat;
-    background-size: cover;
-    height: 888px;
+    background-size: 100% 100%;
 
     h1 {
       text-align: center;
       background: url("/images/stores_titbg.png") bottom center no-repeat;
+    }
+
+    .news-list {
+      width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-content: center;
+      align-items: center;
+      justify-content: space-between;
+
+      .news-item {
+        position: relative;
+        width: 369px;
+        height: 492px;
+
+        img {
+          width: 100%;
+          -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+        }
+
+        .news-time {
+          position: absolute;
+          right: 20px;
+          top: 20px;
+          padding: 5px 10px;
+          font-size: 14px;
+          color: #fff;
+          font-weight: bold;
+          background: #f9c152;
+          border-radius: 3px;
+          display: block;
+        }
+
+        &:hover .news-info {
+          top: 200px;
+        }
+
+        .news-info {
+          width: 330px;
+          padding: 40px 25px;
+          position: absolute;
+          top: 230px;
+          left: 50%;
+          margin-left: -165px;
+          background: #fff;
+          -webkit-box-shadow: 0 0 30px #d7d7d7;
+          box-shadow: 0 0 30px #d7d7d7;
+          text-align: center;
+          -webkit-transition: top 1s;
+          transition: top 1s;
+          -moz-transition: top 0.5s;
+          -webkit-transition: top 0.5s;
+          -o-transition: top 0.5s;
+
+          h5 {
+            font-size: 22px;
+            color: #333;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2; /* 显示的最大行数 */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          p {
+            font-size: 14px;
+            color: #777;
+            line-height: 20px;
+            text-align: justify;
+            margin: 15px 0 30px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3; /* 显示的最大行数 */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .readmore {
+            display: flex;
+            align-content: center;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #272727;
+            margin: 0 auto;
+            height: 16px;
+            line-height: 16px;
+
+            .icon-play {
+              margin-right: 6px;
+              font-size: 16px;
+            }
+          }
+        }
+      }
+    }
+
+    :deep(.el-tabs--card > .el-tabs__header) {
+      border-bottom: none;
+    }
+
+    :deep(.el-tabs--card > .el-tabs__header .el-tabs__nav) {
+      border: none;
+    }
+
+    :deep(.el-tabs--card > .el-tabs__header .el-tabs__item) {
+      border-left: none;
+      font-size: 16px;
+      margin: 0 10px;
+      border: 1px solid #dcdfe6;
+    }
+
+    :deep(.el-tabs__nav) {
+      float: none;
+      justify-content: center;
+    }
+
+    :deep(.el-tabs__item.is-active, .el-tabs__item:hover) {
+      color: #fff;
+      background-color: var(--el-color-primary);
+      border: none !important;
+    }
+
+    :deep(.el-tabs__content) {
+      margin-top: 60px;
     }
   }
 }

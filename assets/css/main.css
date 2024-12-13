@@ -5,6 +5,11 @@
   font-style: normal;
 }
 
+/* 修改主题色 */
+:root {
+  --el-color-primary: #f9c152 !important;
+}
+
 * {
   font-family: "MiSans";
   margin: 0;

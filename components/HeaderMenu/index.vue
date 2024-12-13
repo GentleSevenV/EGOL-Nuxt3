@@ -6,7 +6,6 @@
       :ellipsis="false"
       background-color="#fff"
       text-color="#333"
-      active-text-color="#f8c052"
       router
     >
       <template v-for="item in navArr" :key="item.id">

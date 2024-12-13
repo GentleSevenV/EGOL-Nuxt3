@@ -1,5 +1,5 @@
 declare interface DataResponse<T> {
-  status: string;
+  code: string;
   message?: string;
   data: T;
 }
