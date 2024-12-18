@@ -95,7 +95,7 @@
               <el-tab-pane label="品牌资讯" name="first">
                 <div class="news-list">
                   <template v-for="item in brandnews" :key="item.id">
-                    <NuxtLink :to="`/news/${item.id}`">
+                    <NuxtLink :to="`/news/${item.category}/${item.id}`">
                       <div class="news-item">
                         <img :src="item.coverImage" />
                         <span class="news-time">{{ item.createTime.slice(0, 11) }}</span>
@@ -117,7 +117,7 @@
               <el-tab-pane label="行业资讯" name="second">
                 <div class="news-list">
                   <template v-for="item in indstynews" :key="item.id">
-                    <NuxtLink :to="`/news/${item.id}`">
+                    <NuxtLink :to="`/news/${item.category}/${item.id}`">
                       <div class="news-item">
                         <img :src="item.coverImage" />
                         <span class="news-time">{{ item.createTime.slice(0, 11) }}</span>
@@ -139,7 +139,7 @@
               <el-tab-pane label="精彩活动" name="third">
                 <div class="news-list">
                   <template v-for="item in activitynews" :key="item.id">
-                    <NuxtLink :to="`/news/${item.id}`">
+                    <NuxtLink :to="`/news/${item.category}/${item.id}`">
                       <div class="news-item">
                         <img :src="item.coverImage" />
                         <span class="news-time">{{ item.createTime.slice(0, 11) }}</span>
@@ -234,6 +234,7 @@ const activeName = ref("first");
 interface INewsType {
   id: number;
   title: string;
+  category: string;
   description: string;
   coverImage: string;
   createTime: string;
@@ -246,15 +247,15 @@ const activitynews = ref<INewsType[] | null>(null);
 const [{ data: res1 }, { data: res2 }, { data: res3 }] = await Promise.all([
   useFetch<DataResponse<INewsType[]>>("/open/news/info/list", {
     method: "post",
-    body: { category: 0, page: 1, size: 3 },
+    body: { category: "brandnews", page: 1, size: 3 },
   }),
   useFetch<DataResponse<INewsType[]>>("/open/news/info/list", {
     method: "post",
-    body: { category: 1, page: 1, size: 3 },
+    body: { category: "industrynews", page: 1, size: 3 },
   }),
   useFetch<DataResponse<INewsType[]>>("/open/news/info/list", {
     method: "post",
-    body: { category: 2, page: 1, size: 3 },
+    body: { category: "activitynews", page: 1, size: 3 },
   }),
 ]);
 

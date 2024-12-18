@@ -39,8 +39,10 @@
 </template>
 
 <script lang="ts" setup>
-const activeIndex = ref("");
-
+// const activeIndex = ref("");
+const activeIndex = useState("menu", () => {
+  return "";
+});
 // 获取到当前激活的路由对象,并且将当前的路由对象赋值给激活的el-menu,这样即可保证刷新页面时依旧保持当前路由
 const route = useRoute();
 
