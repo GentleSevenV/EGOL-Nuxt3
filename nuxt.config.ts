@@ -1,7 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
-  devtools: { enabled: true },
+  devtools: {
+    enabled: true,
+
+    timeline: {
+      enabled: true,
+    },
+  },
+  features: {
+    inlineStyles: false,
+  },
   modules: ["@element-plus/nuxt", "nuxt-swiper", "@nuxt/icon"],
   icon: {
     customCollections: [
@@ -11,7 +20,7 @@ export default defineNuxtConfig({
       },
     ],
   },
-  css: ["~/assets/css/main.css"],
+  css: ["~/assets/css/main.css", "element-plus/dist/index.css"],
   imports: {
     dirs: ["types"],
   },

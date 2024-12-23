@@ -94,9 +94,9 @@
             <el-tabs v-model="activeName" type="card" class="news-tabs">
               <el-tab-pane label="品牌资讯" name="first">
                 <div class="news-list">
-                  <template v-for="item in brandnews" :key="item.id">
-                    <NuxtLink :to="`/news/${item.category}/${item.id}`">
-                      <div class="news-item">
+                  <template v-for="item in brandnews?.data.list" :key="item.id">
+                    <div class="news-item">
+                      <NuxtLink :to="`/news/${item.category}/${item.id}`">
                         <img :src="item.coverImage" />
                         <span class="news-time">{{ item.createTime.slice(0, 11) }}</span>
                         <div class="news-info">
@@ -109,14 +109,14 @@
                             阅读更多
                           </div>
                         </div>
-                      </div>
-                    </NuxtLink>
+                      </NuxtLink>
+                    </div>
                   </template>
                 </div>
               </el-tab-pane>
               <el-tab-pane label="行业资讯" name="second">
                 <div class="news-list">
-                  <template v-for="item in indstynews" :key="item.id">
+                  <template v-for="item in indstynews?.data.list" :key="item.id">
                     <NuxtLink :to="`/news/${item.category}/${item.id}`">
                       <div class="news-item">
                         <img :src="item.coverImage" />
@@ -138,7 +138,7 @@
               </el-tab-pane>
               <el-tab-pane label="精彩活动" name="third">
                 <div class="news-list">
-                  <template v-for="item in activitynews" :key="item.id">
+                  <template v-for="item in activitynews?.data.list" :key="item.id">
                     <NuxtLink :to="`/news/${item.category}/${item.id}`">
                       <div class="news-item">
                         <img :src="item.coverImage" />
@@ -240,28 +240,20 @@ interface INewsType {
   createTime: string;
 }
 
-const brandnews = ref<INewsType[] | null>(null);
-const indstynews = ref<INewsType[] | null>(null);
-const activitynews = ref<INewsType[] | null>(null);
-
-const [{ data: res1 }, { data: res2 }, { data: res3 }] = await Promise.all([
-  useFetch<DataResponse<INewsType[]>>("/open/news/info/list", {
+const [{ data: brandnews }, { data: indstynews }, { data: activitynews }] = await Promise.all([
+  useFetch<DataResponsePage<INewsType[]>>("/open/news/info/page", {
     method: "post",
     body: { category: "brandnews", page: 1, size: 3 },
   }),
-  useFetch<DataResponse<INewsType[]>>("/open/news/info/list", {
+  useFetch<DataResponsePage<INewsType[]>>("/open/news/info/page", {
     method: "post",
     body: { category: "industrynews", page: 1, size: 3 },
   }),
-  useFetch<DataResponse<INewsType[]>>("/open/news/info/list", {
+  useFetch<DataResponsePage<INewsType[]>>("/open/news/info/page", {
     method: "post",
     body: { category: "activitynews", page: 1, size: 3 },
   }),
 ]);
-
-brandnews.value = res1.value?.data || [];
-indstynews.value = res2.value?.data || [];
-activitynews.value = res3.value?.data || [];
 </script>
 <style lang="less" scoped>
 .egol-page {
@@ -317,7 +309,7 @@ activitynews.value = res3.value?.data || [];
         }
 
         .more {
-          background-color: #f9c152;
+          background-color: var(--theme-color);
           width: 130px;
           height: 40px;
           text-align: center;
@@ -392,7 +384,7 @@ activitynews.value = res3.value?.data || [];
           margin-top: 40px;
 
           .more {
-            background-color: #f9c152;
+            background-color: var(--theme-color);
             width: 130px;
             height: 40px;
             text-align: center;
@@ -522,7 +514,7 @@ activitynews.value = res3.value?.data || [];
       }
 
       .more {
-        background-color: #f9c152;
+        background-color: var(--theme-color);
         width: 130px;
         height: 40px;
         text-align: center;
@@ -572,7 +564,7 @@ activitynews.value = res3.value?.data || [];
           font-size: 14px;
           color: #fff;
           font-weight: bold;
-          background: #f9c152;
+          background: var(--theme-color);
           border-radius: 3px;
           display: block;
         }

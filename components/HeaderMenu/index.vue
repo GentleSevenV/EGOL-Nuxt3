@@ -39,19 +39,33 @@
 </template>
 
 <script lang="ts" setup>
-// const activeIndex = ref("");
-const activeIndex = useState("menu", () => {
-  return "";
-});
 // 获取到当前激活的路由对象,并且将当前的路由对象赋值给激活的el-menu,这样即可保证刷新页面时依旧保持当前路由
 const route = useRoute();
+
+// 为了当点击在news页面中的2级导航时，可以联动此处的主导航，所以将此组件的activeIndex使用useState定义为全局状态，这样就可以在news页面中修改此值,达到二级导航和主导航联动的效果
+const activeIndex = useState("menu", () => {
+  return route.path;
+});
 
 // 通过监听器watch监听route.path的路由变化来实现头部导航的刷新后选中状态
 // Vue3中监听器在页面加载（监听器刚创建的时候）的时候不会执行，所以为了在页面加载（监听器刚创建的时候）的时候也监听数据的变化，则需要添加第三个参数：{immediate:true}
 watch(
   () => route.path,
   (value, oldvalue) => {
-    activeIndex.value = value;
+    // console.log(value, oldvalue);
+    // 判断路由中是否存在category值，如果有值，则需要将路径末尾的/:id去除之后赋值给el-menu绑定的activeIndex以获得状态更新
+    // 例如：/news/brandnews/6,为了让el-menu可以获得状态更新，则必须去除路径末尾的/6
+    if (route.params.category) {
+      // 1.使用split方法将原route.path值按照/进行分割成数组
+      const newValue = value.split("/");
+      // 2.移除数组中第一个空元素
+      newValue.shift();
+      // 3.拼接成新的路径
+      const newpath = "/" + newValue.slice(0, 2).join("/");
+      activeIndex.value = newpath;
+    } else {
+      activeIndex.value = value;
+    }
   },
   { immediate: true }
 );

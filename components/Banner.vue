@@ -50,6 +50,6 @@ const swiper = useSwiper(containerRef, {
 }
 
 swiper-container::part(bullet-active) {
-  background-color: #f8c052;
+  background-color: var(--theme-color);
 }
 </style>

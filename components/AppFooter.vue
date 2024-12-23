@@ -140,7 +140,7 @@ const showFrilinks = () => {
         .icon {
           font-size: 32px;
           margin-right: 6px;
-          color: #f9c152;
+          color: var(--theme-color);
         }
       }
     }
@@ -230,7 +230,7 @@ const showFrilinks = () => {
         }
 
         &:hover {
-          background-color: #f9c152;
+          background-color: var(--theme-color);
           border: none;
 
           .icon {
@@ -281,7 +281,7 @@ const showFrilinks = () => {
       width: 130px;
       height: 48px;
       line-height: 48px;
-      background: #f9c152;
+      background: var(--theme-color);
       letter-spacing: 1px;
       cursor: pointer;
       display: flex;
