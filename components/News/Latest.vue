@@ -9,7 +9,7 @@
             <div class="news-pic">
               <img :src="item.coverImage" />
             </div>
-            <div>
+            <div class="news-info">
               <p class="news-title">{{ item.title }}</p>
               <span class="news-time">{{ item.createTime }}</span>
             </div>
@@ -57,6 +57,7 @@ const { data: latestnews } = await useFetch<DataResponsePage<INewsType[]>>("/ope
 
   .latest-news {
     width: 100%;
+
     .latest-item {
       display: -webkit-box;
       display: -ms-flexbox;
@@ -81,23 +82,27 @@ const { data: latestnews } = await useFetch<DataResponsePage<INewsType[]>>("/ope
         }
       }
 
-      .news-title {
-        font-size: 14px;
-        color: #333;
-        text-align: justify;
-        letter-spacing: 1px;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        line-clamp: 2; /* 显示的最大行数 */
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
+      .news-info {
+        width: 185px;
 
-      .news-time {
-        color: #999;
-        display: block;
-        margin-top: 12px;
+        .news-title {
+          font-size: 14px;
+          color: #333;
+          text-align: justify;
+          letter-spacing: 1px;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          line-clamp: 2; /* 显示的最大行数 */
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .news-time {
+          color: #999;
+          display: block;
+          margin-top: 12px;
+        }
       }
     }
   }

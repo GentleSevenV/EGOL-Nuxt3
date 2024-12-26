@@ -26,7 +26,7 @@ watch(
   { immediate: true }
 );
 </script>
-<style lang="less">
+<style lang="less" scoped>
 .header {
   width: 1200px;
   height: 90px;
@@ -48,14 +48,6 @@ watch(
       width: 83.33%;
     }
   }
-}
-
-.el-menu--horizontal.el-menu,
-.el-menu--horizontal > .el-menu-item,
-.el-menu--horizontal > .el-menu-item.is-active,
-.el-menu--horizontal > .el-sub-menu .el-sub-menu__title,
-.el-menu--horizontal > .el-sub-menu.is-active .el-sub-menu__title {
-  border-bottom: none !important;
 }
 
 .float {

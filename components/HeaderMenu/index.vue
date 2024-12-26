@@ -55,13 +55,20 @@ watch(
     // console.log(value, oldvalue);
     // 判断路由中是否存在category值，如果有值，则需要将路径末尾的/:id去除之后赋值给el-menu绑定的activeIndex以获得状态更新
     // 例如：/news/brandnews/6,为了让el-menu可以获得状态更新，则必须去除路径末尾的/6
-    if (route.params.category) {
-      // 1.使用split方法将原route.path值按照/进行分割成数组
-      const newValue = value.split("/");
-      // 2.移除数组中第一个空元素
-      newValue.shift();
+
+    // 1.使用split方法将原route.path值按照/进行分割成数组
+    const newValue = value.split("/");
+    // console.log(newValue);
+    // 2.移除数组中第一个空元素
+    newValue.shift();
+    let newpath;
+    if (route.params.category && route.params.id) {
       // 3.拼接成新的路径
-      const newpath = "/" + newValue.slice(0, 2).join("/");
+      newpath = "/" + newValue.slice(0, 2).join("/");
+      activeIndex.value = newpath;
+    } else if (route.params.id) {
+      // 4.如果没有category参数的路由，只需要判断是否存在id参数即可，并且newpath取值需要减少一位
+      newpath = "/" + newValue.slice(0, 1);
       activeIndex.value = newpath;
     } else {
       activeIndex.value = value;
@@ -139,28 +146,69 @@ navArr.value = navData;
   border-bottom: none;
   width: 1010px;
 
-  .el-menu-item.is-active {
-    border-bottom: none !important;
-    // color: #f8c052 !important;
-  }
-
-  .el-sub-menu.is-active {
-    border-bottom: none !important;
+  .el-menu {
+    border-bottom: none;
   }
 
   .el-menu-item {
     --el-menu-base-level-padding: 18px;
-    // color: #333 !important;
-
-    // &:hover {
-    //   --el-menu-hover-bg-color: none;
-    //   color: var(--el-menu-hover-text-color) !important;
-    // }
+    border-bottom: none;
   }
 
-  .el-menu-item:not(.is-disabled):focus,
-  .el-menu-item:not(.is-disabled):hover {
-    --el-menu-hover-bg-color: none;
+  :deep(.el-sub-menu .el-sub-menu__title) {
+    border-bottom: none;
+  }
+}
+
+:deep(.el-menu) {
+  margin: 0 auto;
+
+  .el-submenu {
+    height: 60px;
+  }
+
+  .el-submenu__title {
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: bold;
+    border-bottom: 0px;
+  }
+
+  .el-menu-item:not(.is-disabled):hover,
+  .el-menu-item:not(.is-disabled):focus {
+    background: none;
+  }
+}
+</style>
+<style>
+.el-popper.is-light,
+.el-popper.is-light > .el-popper__arrow:before {
+  border: none;
+  border-radius: 0;
+}
+
+.el-menu--popup {
+  border-radius: 0px !important;
+  padding: 10px 0px !important;
+  box-shadow: none;
+  border: none;
+  min-width: 120px;
+
+  .el-menu-item {
+    justify-content: center;
+    color: #333333 !important;
+    margin: 5px 10px;
+    border-radius: 4px;
+  }
+
+  .el-menu-item:hover {
+    color: var(--theme-color) !important;
+    background-color: var(--theme-color-light) !important;
+  }
+
+  .el-menu-item.is-active {
+    color: var(--theme-color) !important;
+    background-color: var(--theme-color-light) !important;
   }
 }
 </style>

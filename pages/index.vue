@@ -196,6 +196,7 @@ const { data: recProducts } = await useFetch<DataResponse<IRecProducts[]>>(
     method: "post",
     body: {
       recommend: 1,
+      status: 1,
     },
   }
 );

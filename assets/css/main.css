@@ -8,6 +8,7 @@
 /* 修改主题色 */
 :root {
   --theme-color: #f9c152;
+  --theme-color-light: #fff2d9;
   --el-color-primary: var(--theme-color) !important;
 }
 
