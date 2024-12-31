@@ -10,43 +10,70 @@
         <i></i>
       </div>
       <div class="filter">
-        <el-radio-group @change="categoryChange" v-model="category">
-          <el-radio :value="1">Option A</el-radio>
-          <el-radio :value="2">Option B</el-radio>
-          <el-radio :value="3">Option C</el-radio>
-        </el-radio-group>
+        <div class="filter-item">
+          <h3>类型</h3>
+          <el-radio-group @change="categoryChange" v-model="category">
+            <el-radio border :value="0">全部</el-radio>
+            <template v-for="item in filterDict?.data.category">
+              <el-radio border :value="item.value">{{ item.name }}</el-radio>
+            </template>
+          </el-radio-group>
+        </div>
+        <div class="filter-item">
+          <h3>风格</h3>
+          <el-radio-group @change="styleChange" v-model="style">
+            <el-radio border :value="0">全部</el-radio>
+            <template v-for="item in filterDict?.data.style">
+              <el-radio border :value="item.value">{{ item.name }}</el-radio>
+            </template>
+          </el-radio-group>
+        </div>
+        <div class="filter-item">
+          <h3>空间</h3>
+          <el-radio-group @change="spaceChange" v-model="space">
+            <el-radio border :value="0">全部</el-radio>
+            <template v-for="item in filterDict?.data.space">
+              <el-radio border :value="item.value">{{ item.name }}</el-radio>
+            </template>
+          </el-radio-group>
+        </div>
       </div>
 
-      <div class="products-list">
-        <template v-for="item in productslist?.data.list" :key="item.id">
-          <NuxtLink class="item" :to="`/products/${item.id}`">
-            <h3>{{ item.name }}</h3>
-            <i></i>
-            <img :src="item.coverImage" />
-            <div>
-              <p>包含：{{ item.includes }}</p>
-              <div class="readmore">
-                <Icon class="icon-play" name="icons:play" />
-                了解更多
+      <div v-if="productsList?.length != 0">
+        <div class="products-list">
+          <template v-for="item in productsList" :key="item.id">
+            <NuxtLink class="item" :to="`/products/${item.id}`">
+              <h3>{{ item.name }}</h3>
+              <i></i>
+              <img :src="item.coverImage" />
+              <div>
+                <p>包含：{{ item.includes }}</p>
+                <div class="readmore">
+                  <Icon class="icon-play" name="icons:play" />
+                  了解更多
+                </div>
               </div>
-            </div>
-          </NuxtLink>
-        </template>
-      </div>
+            </NuxtLink>
+          </template>
+        </div>
 
-      <div class="pagination">
-        <ClientOnly fallback-tag="span" fallback="分页加载中...">
-          <el-pagination
-            v-model:current-page="currentPage"
-            v-model:page-size="pageSize"
-            :page-sizes="[2, 4, 6]"
-            background
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="totalNews"
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-          />
-        </ClientOnly>
+        <div class="pagination">
+          <ClientOnly fallback-tag="span" fallback="分页加载中...">
+            <el-pagination
+              v-model:current-page="filterData.page"
+              v-model:page-size="filterData.size"
+              :page-sizes="[3, 6, 9]"
+              background
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="total"
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+            />
+          </ClientOnly>
+        </div>
+      </div>
+      <div v-else>
+        <el-empty description="未查询到与该条件匹配的商品，请选择其他品类。" />
       </div>
     </div>
   </div>
@@ -60,41 +87,108 @@ interface IProducts {
   includes: string;
 }
 
-const category = ref(1);
+const category = ref<string | number | boolean | undefined>(0);
+const style = ref<string | number | boolean | undefined>(0);
+const space = ref<string | number | boolean | undefined>(0);
 
-const currentPage = ref(1);
-const pageSize = ref(6);
-const totalNews = ref(0);
+interface Ifilter {
+  category?: string | number | boolean | null;
+  style?: string | number | boolean | null;
+  space?: string | number | boolean | null;
+  page: number;
+  size: number;
+  status: number;
+}
+const filterData = reactive<Ifilter>({
+  category: null,
+  style: null,
+  space: null,
+  page: 1, // 页面是从1开始的,设置默认值为1
+  size: 9,
+  status: 1,
+});
 
-const { data: productslist } = await useFetch<DataResponsePage<IProducts[]>>(
-  "/open/products/info/page",
-  {
+const total = ref<number | undefined>(0);
+const productsList = ref<IProducts[] | undefined>([]);
+
+// 获取筛选器中各分类的数据
+const { data: filterDict } = await useFetch<DataResponsePageDict<IDict[]>>("/open/dict/info/data", {
+  method: "post",
+  body: { types: ["category", "style", "space"] },
+});
+
+// 获取默认产品列表数据
+const { data } = await useFetch<DataResponsePage<IProducts[]>>("/open/products/info/page", {
+  method: "post",
+  body: filterData,
+});
+
+productsList.value = data.value?.data.list;
+total.value = data.value?.data.pagination.total;
+
+const filterProduct = async (filterData: Ifilter) => {
+  const data = await $fetch<DataResponsePage<IProducts[]>>("/open/products/info/page", {
     method: "post",
-    body: {
-      status: 1,
-      page: currentPage.value,
-      size: pageSize.value,
-    },
+    body: filterData,
+  });
+  // console.log(data);
+  return data.data;
+};
+
+const categoryChange = (val: string | number | boolean | undefined) => {
+  // console.log(val);
+  if (val === 0) {
+    filterData.category = null;
+  } else {
+    filterData.category = val;
   }
-);
 
-const categoryChange = async () => {
-  const data = await $fetch("/open/products/info/page", {
-    method: "post",
-    body: {
-      category: category.value,
-      page: currentPage.value,
-      size: pageSize.value,
-      status: 1,
-    },
+  // console.log(filterData);
+  filterProduct(filterData).then((res) => {
+    productsList.value = res.list;
+    total.value = res.pagination.total;
+  });
+};
+
+const styleChange = (val: string | number | boolean | undefined) => {
+  if (val === 0) {
+    filterData.style = null;
+  } else {
+    filterData.style = val;
+  }
+
+  filterProduct(filterData).then((res) => {
+    productsList.value = res.list;
+    total.value = res.pagination.total;
+  });
+};
+
+const spaceChange = (val: string | number | boolean | undefined) => {
+  if (val === 0) {
+    filterData.space = null;
+  } else {
+    filterData.space = val;
+  }
+
+  filterProduct(filterData).then((res) => {
+    productsList.value = res.list;
+    total.value = res.pagination.total;
   });
 };
 
 const handleSizeChange = (val: number) => {
-  console.log(`${val} items per page`);
+  filterData.size = val;
+  filterProduct(filterData).then((res) => {
+    productsList.value = res.list;
+    total.value = res.pagination.total;
+  });
 };
 const handleCurrentChange = (val: number) => {
-  console.log(`current page: ${val}`);
+  filterData.page = val;
+  filterProduct(filterData).then((res) => {
+    productsList.value = res.list;
+    total.value = res.pagination.total;
+  });
 };
 </script>
 <style lang="less" scoped>
@@ -116,7 +210,23 @@ const handleCurrentChange = (val: number) => {
 
     .filter {
       width: 1200px;
-      margin: 40px auto;
+      margin: 40px auto 80px;
+
+      .filter-item {
+        margin-bottom: 20px;
+
+        h3 {
+          font-size: 18px;
+          margin-bottom: 10px;
+        }
+      }
+
+      :deep(.el-radio) {
+        line-height: 32px;
+      }
+      :deep(.el-radio__input) {
+        display: none;
+      }
     }
 
     .page-title {
@@ -146,18 +256,10 @@ const handleCurrentChange = (val: number) => {
     .products-list {
       width: 1200px;
       margin: 0 auto;
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      flex-wrap: wrap;
-      -ms-flex-line-pack: center;
-      align-content: center;
-      -webkit-box-align: start;
-      -ms-flex-align: start;
-      align-items: flex-start;
-      -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: repeat(3, 380px); /* 每行3个，每个宽度为380px */
+      gap: 20px; /* 固定间距 */
+      justify-content: space-between; /* 子元素之间的间距自适应 */
 
       .item {
         width: 380px;
@@ -165,7 +267,7 @@ const handleCurrentChange = (val: number) => {
         margin-bottom: 30px;
 
         h3 {
-          font-size: 20px;
+          font-size: 18px;
         }
 
         i {
@@ -185,8 +287,9 @@ const handleCurrentChange = (val: number) => {
           padding: 25px;
           font-size: 14px;
           color: #939393;
+          background-color: #fff;
           -webkit-box-shadow: 0px 2px 13px #ececec;
-          box-shadow: 0px 2px 13px #ececec;
+          box-shadow: 0px 0px 10px #ececec;
 
           p {
             color: #939393;
@@ -215,6 +318,14 @@ const handleCurrentChange = (val: number) => {
           }
         }
       }
+    }
+
+    .pagination {
+      width: 1200px;
+      margin: 60px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

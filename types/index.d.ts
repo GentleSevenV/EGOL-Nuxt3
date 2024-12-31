@@ -15,3 +15,22 @@ interface DataResponsePage<T> {
   data: { list: T; pagination: IPagination };
   message: string;
 }
+
+interface IDict {
+  id: number;
+  name: string;
+  orderNum: number;
+  parentId: number | null;
+  typeId: number;
+  value: number;
+}
+
+interface DataResponsePageDict<T> {
+  code: string;
+  data: {
+    category?: T;
+    style?: T;
+    space?: T;
+  };
+  message: string;
+}

@@ -8,18 +8,16 @@
       text-color="#333"
       router
     >
-      <template v-for="item in navArr" :key="item.id">
-        <template v-if="item.subNav?.length == 0">
-          <template v-if="item.value.startsWith('http')">
-            <el-menu-item index="">
-              <a class="httplink" :href="item.value" target="_blank">{{ item.name }}</a>
-            </el-menu-item>
-          </template>
-          <template v-else>
-            <el-menu-item :index="item.value">
-              {{ item.name }}
-            </el-menu-item>
-          </template>
+      <template v-for="item in navArr">
+        <template v-if="item.subNav?.length == 0 && item.value.startsWith('http')" :key="item.id">
+          <el-menu-item index="">
+            <a class="httplink" :href="item.value" target="_blank">{{ item.name }}</a>
+          </el-menu-item>
+        </template>
+        <template v-else-if="item.subNav?.length == 0">
+          <el-menu-item :index="item.value">
+            {{ item.name }}
+          </el-menu-item>
         </template>
         <template v-else>
           <el-sub-menu :index="item.value">

@@ -182,7 +182,6 @@ const handleCurrentChange = async (val: number) => {
   .pagination {
     width: 100%;
     display: flex;
-    align-content: center;
     align-items: center;
     justify-content: center;
   }
