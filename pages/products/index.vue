@@ -80,7 +80,7 @@
 </template>
 
 <script lang="ts" setup>
-interface IProducts {
+interface IProductsList {
   id: number;
   name: string;
   coverImage: string;
@@ -109,7 +109,7 @@ const filterData = reactive<Ifilter>({
 });
 
 const total = ref<number | undefined>(0);
-const productsList = ref<IProducts[] | undefined>([]);
+const productsList = ref<IProductsList[] | undefined>([]);
 
 // 获取筛选器中各分类的数据
 const { data: filterDict } = await useFetch<DataResponsePageDict<IDict[]>>("/open/dict/info/data", {
@@ -118,7 +118,7 @@ const { data: filterDict } = await useFetch<DataResponsePageDict<IDict[]>>("/ope
 });
 
 // 获取默认产品列表数据
-const { data } = await useFetch<DataResponsePage<IProducts[]>>("/open/products/info/page", {
+const { data } = await useFetch<DataResponsePage<IProductsList[]>>("/open/products/info/page", {
   method: "post",
   body: filterData,
 });
@@ -127,7 +127,7 @@ productsList.value = data.value?.data.list;
 total.value = data.value?.data.pagination.total;
 
 const filterProduct = async (filterData: Ifilter) => {
-  const data = await $fetch<DataResponsePage<IProducts[]>>("/open/products/info/page", {
+  const data = await $fetch<DataResponsePage<IProductsList[]>>("/open/products/info/page", {
     method: "post",
     body: filterData,
   });
