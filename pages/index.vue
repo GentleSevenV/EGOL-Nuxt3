@@ -33,15 +33,24 @@
           <div>
             <ClientOnly>
               <swiper-container ref="containerRef" :init="false">
-                <swiper-slide class="rec-product" v-for="item in recProducts?.data" :key="item.id">
+                <swiper-slide
+                  class="rec-product"
+                  v-for="item in recProducts?.data"
+                  :key="item.id"
+                >
                   <div class="product-infos">
                     <h3>{{ item.name }}</h3>
                     <p>{{ item.description }}</p>
-                    <template v-for="(label, index) in item.labels" :key="index">
+                    <template
+                      v-for="(label, index) in item.labels"
+                      :key="index"
+                    >
                       <span>{{ label }}</span>
                     </template>
                     <div class="probtn">
-                      <NuxtLink class="more" :to="`/products/${item.id}`">了解更多</NuxtLink>
+                      <NuxtLink class="more" :to="`/products/${item.id}`"
+                        >了解更多</NuxtLink
+                      >
                     </div>
                   </div>
                   <img class="product-img" :src="item.coverImage" />
@@ -80,7 +89,9 @@
           <div class="shops-link">
             <p>
               1000+全国专卖店布局<br />
-              <span>打造易高整家定制销售、安装、售后等一站式服务体验终端矩阵</span>
+              <span
+                >打造易高整家定制销售、安装、售后等一站式服务体验终端矩阵</span
+              >
             </p>
             <NuxtLink class="more" to="/about/brandintro">了解更多</NuxtLink>
           </div>
@@ -98,7 +109,9 @@
                     <div class="news-item">
                       <NuxtLink :to="`/news/${item.category}/${item.id}`">
                         <img :src="item.coverImage" />
-                        <span class="news-time">{{ item.createTime.slice(0, 11) }}</span>
+                        <span class="news-time">{{
+                          item.createTime.slice(0, 11)
+                        }}</span>
                         <div class="news-info">
                           <h5>{{ item.title }}</h5>
                           <p>
@@ -116,11 +129,16 @@
               </el-tab-pane>
               <el-tab-pane label="行业资讯" name="second">
                 <div class="news-list">
-                  <template v-for="item in indstynews?.data.list" :key="item.id">
+                  <template
+                    v-for="item in indstynews?.data.list"
+                    :key="item.id"
+                  >
                     <NuxtLink :to="`/news/${item.category}/${item.id}`">
                       <div class="news-item">
                         <img :src="item.coverImage" />
-                        <span class="news-time">{{ item.createTime.slice(0, 11) }}</span>
+                        <span class="news-time">{{
+                          item.createTime.slice(0, 11)
+                        }}</span>
                         <div class="news-info">
                           <h5>{{ item.title }}</h5>
                           <p>
@@ -138,11 +156,16 @@
               </el-tab-pane>
               <el-tab-pane label="精彩活动" name="third">
                 <div class="news-list">
-                  <template v-for="item in activitynews?.data.list" :key="item.id">
+                  <template
+                    v-for="item in activitynews?.data.list"
+                    :key="item.id"
+                  >
                     <NuxtLink :to="`/news/${item.category}/${item.id}`">
                       <div class="news-item">
                         <img :src="item.coverImage" />
-                        <span class="news-time">{{ item.createTime.slice(0, 11) }}</span>
+                        <span class="news-time">{{
+                          item.createTime.slice(0, 11)
+                        }}</span>
                         <div class="news-info">
                           <h5>{{ item.title }}</h5>
                           <p>
@@ -174,13 +197,16 @@ interface IBannerType {
   pcImage: string;
 }
 
-const { data: banners } = await useFetch<DataResponse<IBannerType[]>>("/open/banner/info/list", {
-  method: "post",
-  body: {
-    status: 1,
-    type: 0,
-  },
-});
+const { data: banners } = await useFetch<DataResponse<IBannerType[]>>(
+  "/open/banner/info/list",
+  {
+    method: "post",
+    body: {
+      status: 1,
+      type: 0,
+    },
+  }
+);
 
 interface IRecProducts {
   id: number;
@@ -241,20 +267,21 @@ interface INewsType {
   createTime: string;
 }
 
-const [{ data: brandnews }, { data: indstynews }, { data: activitynews }] = await Promise.all([
-  useFetch<DataResponsePage<INewsType[]>>("/open/news/info/page", {
-    method: "post",
-    body: { category: "brandnews", page: 1, size: 3 },
-  }),
-  useFetch<DataResponsePage<INewsType[]>>("/open/news/info/page", {
-    method: "post",
-    body: { category: "industrynews", page: 1, size: 3 },
-  }),
-  useFetch<DataResponsePage<INewsType[]>>("/open/news/info/page", {
-    method: "post",
-    body: { category: "activitynews", page: 1, size: 3 },
-  }),
-]);
+const [{ data: brandnews }, { data: indstynews }, { data: activitynews }] =
+  await Promise.all([
+    useFetch<DataResponsePage<INewsType[]>>("/open/news/info/page", {
+      method: "post",
+      body: { category: "brandnews", page: 1, size: 3 },
+    }),
+    useFetch<DataResponsePage<INewsType[]>>("/open/news/info/page", {
+      method: "post",
+      body: { category: "industrynews", page: 1, size: 3 },
+    }),
+    useFetch<DataResponsePage<INewsType[]>>("/open/news/info/page", {
+      method: "post",
+      body: { category: "activitynews", page: 1, size: 3 },
+    }),
+  ]);
 </script>
 <style lang="less" scoped>
 .egol-page {

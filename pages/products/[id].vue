@@ -3,10 +3,217 @@
     <div class="header">
       <img src="/public/images/qudz_banner.jpg" />
     </div>
+    <div class="container">
+      <div class="products-breadcrumb">
+        <el-breadcrumb :separator-icon="ArrowRight">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/products' }">
+            整家定制
+          </el-breadcrumb-item>
+          <el-breadcrumb-item>{{ productInfo?.data.name }}</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
+      <div class="product-display">
+        <div class="product-lb">
+          <ClientOnly>
+            <!-- 使用thumbs-swiper指定另外一个swiper的class类名来声明它是缩略图轮播 -->
+            <swiper-container ref="productSwiperRef" thumbs-swiper=".my-thumbs">
+              <swiper-slide
+                class="slide"
+                v-for="(item, index) in productInfo?.data.displayImages"
+                :key="index"
+              >
+                <img :src="item" />
+              </swiper-slide>
+            </swiper-container>
+          </ClientOnly>
+
+          <ClientOnly>
+            <swiper-container ref="thumbsSwiper" class="my-thumbs">
+              <swiper-slide
+                class="slide"
+                v-for="(item, index) in productInfo?.data.displayImages"
+                :key="index"
+              >
+                <img :src="item" />
+              </swiper-slide>
+            </swiper-container>
+          </ClientOnly>
+        </div>
+        <div class="product-info">
+          <h2>{{ productInfo?.data.name }}</h2>
+          <p class="product-includes">包含：{{ productInfo?.data.includes }}</p>
+          <div class="product-tag">
+            <el-tag
+              v-for="(item, index) in productInfo?.data.labels"
+              :key="index"
+              effect="dark"
+            >
+              {{ item }}
+            </el-tag>
+          </div>
+          <div class="product-flex">
+            <p>颜色</p>
+            <div class="color">{{ productInfo?.data.colors }}</div>
+          </div>
+          <div class="product-flex">
+            <p>材质</p>
+            <div>
+              <el-tag
+                v-for="(item, index) in productInfo?.data.materials"
+                :key="index"
+                effect="plain"
+              >
+                {{ item }}
+              </el-tag>
+            </div>
+          </div>
+
+          <NuxtLink
+            class="btn"
+            to="http://p.qiao.baidu.com/cps/chat?siteId=12887600&amp;userId=26908502"
+            target="_blank"
+          >
+            预约量尺
+          </NuxtLink>
+          <p class="tips">
+            ( 以上提供的部分颜色仅供参考，具体系列可选颜色请咨询设计师 )
+          </p>
+        </div>
+      </div>
+
+      <div class="anchor">
+        <el-affix :offset="60">
+          <el-anchor :marker="false" :offset="70" direction="horizontal">
+            <el-anchor-link href="#anchor-1"> 产品详情 </el-anchor-link>
+            <el-anchor-link href="#anchor-2"> 生产基地 </el-anchor-link>
+            <el-anchor-link href="#anchor-3"> 板材优势 </el-anchor-link>
+            <el-anchor-link href="#anchor-4"> 定制流程 </el-anchor-link>
+          </el-anchor>
+        </el-affix>
+      </div>
+
+      <div class="brand-intro">
+        <div class="brand-datas">
+          <div>
+            <div class="data-item">
+              <h1>30</h1>
+              <div>
+                <span>+</span>
+                <span>万</span>
+              </div>
+            </div>
+            <p>30多万平米生产基地</p>
+          </div>
+          <div><div class="line">&nbsp;</div></div>
+          <div>
+            <div class="data-item">
+              <h1>1000</h1>
+              <div>
+                <span>+</span>
+                <span></span>
+              </div>
+            </div>
+            <p>1000多家专卖店</p>
+          </div>
+          <div><div class="line">&nbsp;</div></div>
+          <div>
+            <div class="data-item">
+              <h1>60</h1>
+              <div>
+                <span>+</span>
+                <span></span>
+              </div>
+            </div>
+            <p>60多项荣誉与资质</p>
+          </div>
+          <div><div class="line">&nbsp;</div></div>
+          <div>
+            <div class="data-item">
+              <h1>100</h1>
+              <div>
+                <span>+</span>
+                <span>万</span>
+              </div>
+            </div>
+            <p>累积服务客户</p>
+          </div>
+        </div>
+        <p class="intro-text">
+          我们是研发、设计、生产、销售、服务于一体全屋定制家居企业<br />先后荣获中国十大定制家居品牌、中国环境标志十环认证企业，全国工商联定制家居专委会副会长单位<br />致力为消费者提供360°全屋定制解决方案。
+        </p>
+        <NuxtLink
+          class="btn"
+          to="http://p.qiao.baidu.com/cps/chat?siteId=12887600&amp;userId=26908502"
+          target="_blank"
+        >
+          了解更多
+        </NuxtLink>
+      </div>
+      <div id="anchor-1">
+        <div class="section-title">
+          <h2>21年实力厂家 铸就好品牌</h2>
+          <p>
+            易高整家定制始终坚持“专业环保定制，整家一体交付”，致力于中国定制家居文化的倡导和传播！
+          </p>
+          <i>&nbsp;</i>
+        </div>
+        <div class="jd1">
+          <div class="jd-con">
+            <h3>下塘生产基地</h3>
+            <p>位于下塘工业园区<br />集研发、设计、生产、销售、服务于一体</p>
+            <div>200<span>亩</span></div>
+            <p style="margin: 0; font-size: 14px; color: #999">占地约</p>
+          </div>
+        </div>
+        <div class="jd2">
+          <div class="jd-con jd2-con">
+            <h3>双凤生产基地</h3>
+            <p>
+              位于合肥双凤经济开发区<br />集研发生产、品牌运营、销售、运输物流于一体
+            </p>
+            <div>100000<span>㎡</span></div>
+            <p style="margin: 0; font-size: 14px; color: #999">总建筑面积达</p>
+          </div>
+        </div>
+        <img src="/public/images/jd03.jpg" />
+      </div>
+      <div id="anchor-2">
+        <div class="section-title">
+          <h2>易高优质选材 打造放心品质</h2>
+          <p>
+            易高整家定制始终坚持“专业环保定制，整家一体交付”，致力于中国定制家居文化的倡导和传播！
+          </p>
+          <i>&nbsp;</i>
+        </div>
+        <div class="jd1">
+          <div class="jd-con">
+            <h3>下塘生产基地</h3>
+            <p>位于下塘工业园区<br />集研发、设计、生产、销售、服务于一体</p>
+            <div>200<span>亩</span></div>
+            <p style="margin: 0; font-size: 14px; color: #999">占地约</p>
+          </div>
+        </div>
+        <div class="jd2">
+          <div class="jd-con jd2-con">
+            <h3>双凤生产基地</h3>
+            <p>
+              位于合肥双凤经济开发区<br />集研发生产、品牌运营、销售、运输物流于一体
+            </p>
+            <div>100000<span>㎡</span></div>
+            <p style="margin: 0; font-size: 14px; color: #999">总建筑面积达</p>
+          </div>
+        </div>
+        <img src="/public/images/jd03.jpg" />
+      </div>
+      <div id="anchor-3" style="height: 200px">Anchor 3</div>
+      <div id="anchor-4" style="height: 200px">Anchor 4</div>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { ArrowRight } from "@element-plus/icons-vue";
 const route = useRoute();
 
 const productId = route.params.id;
@@ -30,7 +237,29 @@ const { data: productInfo } = await useFetch<DataResponse<IProductsInfo>>(
   }
 );
 
-console.log(productInfo);
+const productSwiperRef = ref(null);
+const productSwiper = useSwiper(productSwiperRef, {
+  effect: "creative",
+  speed: 1000,
+  navigation: true,
+  creativeEffect: {
+    prev: {
+      shadow: false,
+      translate: ["-20%", 0, -1],
+    },
+    next: {
+      translate: ["100%", 0, 0],
+    },
+  },
+});
+
+const thumbsSwiper = ref(null);
+const swiper = useSwiper(thumbsSwiper, {
+  watchSlidesProgress: true,
+  spaceBetween: 10,
+  slidesPerView: 3,
+  freeMode: true,
+});
 </script>
 <style lang="less" scoped>
 .products {
@@ -42,5 +271,350 @@ console.log(productInfo);
       display: block;
     }
   }
+
+  .container {
+    background: url(/public/images/ruler_bg.jpg) top center no-repeat;
+    background-size: 100% 15px;
+    width: 100%;
+    padding: 60px 0 90px;
+
+    .products-breadcrumb {
+      width: 1200px;
+      margin: 0px auto;
+      border-bottom: 1px solid #e4e4e4;
+      padding-bottom: 30px;
+    }
+
+    .product-display {
+      width: 1200px;
+      margin: 50px auto 0;
+      display: flex;
+      justify-content: space-between;
+
+      .product-lb {
+        width: 767px;
+
+        .slide {
+          width: 767px;
+          height: 431px;
+          cursor: pointer;
+
+          img {
+            width: 100%;
+          }
+        }
+
+        .my-thumbs {
+          margin-top: 10px;
+
+          .slide {
+            opacity: 0.4;
+            height: auto;
+          }
+        }
+
+        .my-thumbs .swiper-slide-thumb-active {
+          opacity: 1;
+        }
+      }
+    }
+
+    .product-info {
+      width: 380px;
+
+      h2 {
+        font-size: 26px;
+      }
+
+      .product-includes {
+        margin: 15px 0;
+      }
+
+      .product-tag {
+        padding-bottom: 30px;
+        border-bottom: 1px solid #e4e4e4;
+        margin-bottom: 20px;
+
+        .el-tag {
+          margin-right: 10px;
+        }
+      }
+
+      .product-flex {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        justify-content: space-between;
+        margin-bottom: 16px;
+
+        p {
+          line-height: 24px;
+        }
+
+        div {
+          width: 338px;
+          display: flex;
+          flex-wrap: wrap;
+          align-content: flex-start;
+          justify-content: flex-start;
+
+          .el-tag {
+            margin-right: 10px;
+            margin-bottom: 10px;
+            --el-tag-border-color: #f9c152;
+          }
+        }
+
+        .color {
+          line-height: 24px;
+        }
+      }
+
+      .btn {
+        display: block;
+        width: 130px;
+        font-size: 18px;
+        color: #333;
+        font-weight: bold;
+        background: #f9c152;
+        text-align: center;
+        padding: 12px 0;
+        margin-top: 100px;
+        cursor: pointer;
+        letter-spacing: 1px;
+        border-radius: 6px;
+      }
+
+      .tips {
+        font-size: 12px;
+        color: #999;
+        padding-top: 25px;
+      }
+    }
+
+    .anchor {
+      width: 1200px;
+      margin: 50px auto;
+
+      :deep(.el-anchor__list) {
+        padding-bottom: 0;
+        border: 1px solid var(--theme-color);
+      }
+
+      .el-anchor__item {
+        width: 300px;
+        border-right: 1px solid var(--theme-color);
+
+        &:nth-last-child(1) {
+          border: none;
+        }
+
+        :deep(.el-anchor__link) {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 50px;
+          font-size: 16px;
+        }
+      }
+    }
+
+    .brand-intro {
+      width: 100%;
+      max-width: 1920px;
+      padding: 100px 0;
+      margin: 0 auto;
+      background: url(/public/images/product_detail_bg.jpg) top center no-repeat;
+
+      .brand-datas {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 1200px;
+        margin: 0 auto;
+        color: #fff;
+
+        .line {
+          height: 55px;
+          width: 1px;
+          background: #515151;
+        }
+
+        .data-item {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          h1 {
+            font-size: 66px;
+          }
+
+          div {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            span {
+              font-size: 15px;
+              display: block;
+              height: 39px;
+              line-height: 40px;
+            }
+          }
+        }
+
+        p {
+          text-align: center;
+        }
+      }
+
+      .intro-text {
+        font-size: 16px;
+        color: #fff;
+        text-align: center;
+        margin: 60px 0 60px;
+        line-height: 40px;
+        letter-spacing: 1px;
+      }
+
+      .btn {
+        display: block;
+        width: 130px;
+        font-size: 14px;
+        color: #333;
+        margin: 0 auto;
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+        background: var(--theme-color);
+        letter-spacing: 1px;
+        border-radius: 5px;
+      }
+    }
+
+    #anchor-1 {
+      width: 1200px;
+      margin: 0 auto;
+      padding: 60px 0;
+
+      .section-title {
+        text-align: center;
+        h2 {
+          font-size: 35px;
+          color: #333;
+        }
+
+        p {
+          font-size: 18px;
+          color: #999;
+          margin-top: 20px;
+        }
+
+        i {
+          width: 100px;
+          margin: 0 auto 60px;
+          height: 15px;
+          border-bottom: 1px solid var(--theme-color);
+          display: block;
+        }
+      }
+
+      .jd1 {
+        background: #f7f7f7 url(/public/images/jd1_bg.jpg) top right no-repeat;
+        height: 462px;
+        padding: 0 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .jd-con {
+          h3 {
+            font-size: 30px;
+            color: #333;
+            font-weight: normal;
+          }
+
+          p {
+            font-size: 16px;
+            color: #999;
+            margin-top: 15px;
+            line-height: 25px;
+          }
+
+          div {
+            font-weight: bold;
+            font-size: 40px;
+            color: #333;
+            margin-top: 80px;
+
+            span {
+              font-size: 16px;
+              font-weight: normal;
+            }
+          }
+        }
+      }
+
+      .jd2 {
+        background: #f7f7f7 url(/public/images/jd2_bg.jpg) top left no-repeat;
+        height: 462px;
+        padding: 0 50px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: end;
+        -ms-flex-pack: end;
+        justify-content: flex-end;
+
+        .jd-con {
+          text-align: right;
+          h3 {
+            font-size: 30px;
+            color: #333;
+            font-weight: normal;
+          }
+
+          p {
+            font-size: 16px;
+            color: #999;
+            margin-top: 15px;
+            line-height: 25px;
+          }
+
+          div {
+            font-weight: bold;
+            font-size: 40px;
+            color: #333;
+            margin-top: 80px;
+
+            span {
+              font-size: 16px;
+              font-weight: normal;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+:deep(.el-breadcrumb__inner.is-link) {
+  font-weight: normal;
+}
+
+// 自定义 swiper 样式，参考：https://swiperjs.com/element#parts
+swiper-container::part(button-prev) {
+  width: 16px;
+  color: #fff;
+}
+
+swiper-container::part(button-next) {
+  width: 16px;
+  color: #fff;
 }
 </style>
