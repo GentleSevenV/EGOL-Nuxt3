@@ -93,7 +93,7 @@
         </el-affix>
       </div>
 
-      <div class="brand-intro">
+      <div id="anchor-1" class="brand-intro">
         <div class="brand-datas">
           <div>
             <div class="data-item">
@@ -150,7 +150,7 @@
           了解更多
         </NuxtLink>
       </div>
-      <div id="anchor-1">
+      <div id="anchor-2" class="anchor-section">
         <div class="section-title">
           <h2>21年实力厂家 铸就好品牌</h2>
           <p>
@@ -178,7 +178,7 @@
         </div>
         <img src="/public/images/jd03.jpg" />
       </div>
-      <div id="anchor-2">
+      <div id="anchor-3" class="anchor-section">
         <div class="section-title">
           <h2>易高优质选材 打造放心品质</h2>
           <p>
@@ -186,28 +186,127 @@
           </p>
           <i>&nbsp;</i>
         </div>
-        <div class="jd1">
+        <div class="bc1">
           <div class="jd-con">
-            <h3>下塘生产基地</h3>
-            <p>位于下塘工业园区<br />集研发、设计、生产、销售、服务于一体</p>
-            <div>200<span>亩</span></div>
-            <p style="margin: 0; font-size: 14px; color: #999">占地约</p>
+            <h3>环保板材</h3>
+            <p>全天然绿色板材</p>
+            <div class="ys">
+              <span>经久耐用</span><span>透气防潮</span><span>稳定环保</span
+              ><span>承重力强</span>
+            </div>
           </div>
         </div>
-        <div class="jd2">
+        <div class="bc2">
           <div class="jd-con jd2-con">
-            <h3>双凤生产基地</h3>
-            <p>
-              位于合肥双凤经济开发区<br />集研发生产、品牌运营、销售、运输物流于一体
-            </p>
-            <div>100000<span>㎡</span></div>
-            <p style="margin: 0; font-size: 14px; color: #999">总建筑面积达</p>
+            <h3>表面装饰</h3>
+            <p>德国进口环保表面装饰膜</p>
+            <div class="ys">
+              <span>抗污易清洁</span><span>抗黄不褪色</span><span>耐热耐磨</span
+              ><span>防潮防霉</span>
+            </div>
           </div>
         </div>
-        <img src="/public/images/jd03.jpg" />
+        <div class="bc3">
+          <div class="jd-con">
+            <h3>品牌五金</h3>
+            <p>国际知名品牌高精密五金</p>
+            <div class="ys">
+              <span>设计精巧</span><span>缓冲静音</span><span>牢固耐用</span
+              ><span>品质保障</span>
+            </div>
+          </div>
+        </div>
+        <div class="section-title">
+          <h2>精选豪华配件，坚持品质护航</h2>
+          <p>GIVE YOU A BETTER CAQUALITY COTTON FILLING</p>
+          <i>&nbsp;</i>
+        </div>
+        <div class="pj-con">
+          <div class="pj-item">
+            <img src="/public/images/pj1.jpg" />
+            <div>
+              <h3>HINGE</h3>
+              <h4>德国海蒂诗门铰</h4>
+              <span class="pj-line">&nbsp;</span>
+              <p>
+                10万次开合无故障，25年以上使用寿命
+                <span>
+                  100,000 TIMES OF OPENING AND CLOSING WITHOUT BREAKDOWN,MORE
+                  THAN 25 YEARS OF SERVICE LIFE
+                </span>
+              </p>
+            </div>
+          </div>
+          <div class="pj-item">
+            <div>
+              <h3>GUIDE</h3>
+              <h4>德国海蒂诗隐藏式导轨</h4>
+              <span class="pj-line">&nbsp;</span>
+              <p>
+                美观实用，不露滑轨<br />顺滑抽拉无噪音，承重力强
+                <span>
+                  BEAUTIFUL AND PRACTICAL, NO SLIDING TRACK, SMOOTH PULLING, NO
+                  NOISE STRONG BEARING CAPACITY
+                </span>
+              </p>
+            </div>
+            <img src="/public/images/pj2.jpg" />
+          </div>
+          <div class="pj-item">
+            <img src="/public/images/pj3.jpg" />
+            <div>
+              <h3>TATAMI SUPPORT</h3>
+              <h4>榻榻米支撑</h4>
+              <span class="pj-line">&nbsp;</span>
+              <p>
+                自带缓冲设计，闭合轻柔缓降<br />闭合无声音，不夹手
+                <span>
+                  BUFFER DESIGN,SOFT AND GENTLE CLOSURE,SILENT CLOSURE,NO
+                  GRIPPER
+                </span>
+              </p>
+            </div>
+          </div>
+          <div class="pj-item">
+            <div>
+              <h3>CLOTHES POLE</h3>
+              <h4>橡胶防滑拉丝衣杆</h4>
+              <span class="pj-line">&nbsp;</span>
+              <p>
+                超静音，承重力强，多色可选
+                <span>
+                  SUPER SILENCE, STRONG BEARING CAPACITY, MULTI-COLOR OPTIONAL
+                </span>
+              </p>
+            </div>
+            <img src="/public/images/pj4.jpg" />
+          </div>
+          <div class="pj-item">
+            <img src="/public/images/pj3.jpg" />
+            <div>
+              <h3>HARDWARE HANDLE</h3>
+              <h4>五金拉手</h4>
+              <span class="pj-line">&nbsp;</span>
+              <p>
+                精致拉手，美观耐用<br />细节体现品质，款式多种可选
+                <span>
+                  DELICATE HANDSHAKE,BEAUTIFUL AND DURABLE,DETAILS REFLECT
+                  QUALITY,A VARIETY OF STYLES CAN BE SELECTED
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div id="anchor-3" style="height: 200px">Anchor 3</div>
-      <div id="anchor-4" style="height: 200px">Anchor 4</div>
+      <div id="anchor-4" class="anchor-section dzlc">
+        <div class="section-title">
+          <h2>易高整家定制 定制流程</h2>
+          <p>免费测量、免费设计、免费运输、免费安装</p>
+          <i>&nbsp;</i>
+        </div>
+
+        <img src="/public/images/dzlc.png" />
+      </div>
     </div>
   </div>
 </template>
@@ -276,7 +375,7 @@ const swiper = useSwiper(thumbsSwiper, {
     background: url(/public/images/ruler_bg.jpg) top center no-repeat;
     background-size: 100% 15px;
     width: 100%;
-    padding: 60px 0 90px;
+    padding: 60px 0 0;
 
     .products-breadcrumb {
       width: 1200px;
@@ -492,10 +591,10 @@ const swiper = useSwiper(thumbsSwiper, {
       }
     }
 
-    #anchor-1 {
+    .anchor-section {
       width: 1200px;
       margin: 0 auto;
-      padding: 60px 0;
+      padding: 60px 0 20px;
 
       .section-title {
         text-align: center;
@@ -598,6 +697,189 @@ const swiper = useSwiper(thumbsSwiper, {
             }
           }
         }
+      }
+
+      .bc1 {
+        background: #f7f7f7 url(/public/images/bc1_bg.jpg) top right no-repeat;
+        height: 462px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+
+        .jd-con {
+          padding-left: 50px;
+
+          h3 {
+            font-size: 30px;
+            color: #333;
+            font-weight: normal;
+          }
+
+          p {
+            font-size: 16px;
+            color: #999;
+            margin-top: 15px;
+            line-height: 25px;
+          }
+
+          div {
+            margin-top: 80px;
+
+            span {
+              font-size: 16px;
+              font-weight: normal;
+              padding: 5px 10px;
+              border: 1px solid #333;
+              margin-left: 6px;
+            }
+          }
+        }
+      }
+
+      .bc2 {
+        background: #f7f7f7 url(/public/images/bc2_bg.jpg) top left no-repeat;
+        height: 462px;
+        margin-top: 15px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        justify-content: flex-end;
+
+        .jd-con {
+          padding-left: 50px;
+
+          h3 {
+            font-size: 30px;
+            color: #333;
+            font-weight: normal;
+          }
+
+          p {
+            font-size: 16px;
+            color: #999;
+            margin-top: 15px;
+            line-height: 25px;
+          }
+
+          div {
+            margin-top: 80px;
+
+            span {
+              font-size: 16px;
+              font-weight: normal;
+              padding: 5px 10px;
+              border: 1px solid #333;
+              margin-left: 6px;
+            }
+          }
+        }
+
+        .jd2-con {
+          text-align: right;
+          padding-right: 50px;
+        }
+      }
+
+      .bc3 {
+        background: #f7f7f7 url(/public/images/bc3_bg.jpg) top right no-repeat;
+        height: 462px;
+        margin-top: 15px;
+        margin-bottom: 60px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+
+        .jd-con {
+          padding-left: 50px;
+
+          h3 {
+            font-size: 30px;
+            color: #333;
+            font-weight: normal;
+          }
+
+          p {
+            font-size: 16px;
+            color: #999;
+            margin-top: 15px;
+            line-height: 25px;
+          }
+
+          div {
+            margin-top: 80px;
+
+            span {
+              font-size: 16px;
+              font-weight: normal;
+              padding: 5px 10px;
+              border: 1px solid #333;
+              margin-left: 6px;
+            }
+          }
+        }
+      }
+
+      .pj-con {
+        width: 1200px;
+        margin: 0 auto;
+
+        .pj-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: #eee;
+
+          div {
+            padding: 38px;
+
+            h3 {
+              font-size: 40px;
+            }
+
+            h4 {
+              font-size: 30px;
+              font-weight: normal;
+            }
+
+            .pj-line {
+              display: block;
+              width: 50px;
+              border-bottom: 2px solid #333;
+            }
+
+            p {
+              font-size: 18px;
+              margin-top: 30px;
+
+              span {
+                display: block;
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .dzlc {
+      width: 100%;
+      height: 462px;
+      background: url(/public/images/dzlc_bg.jpg) top center no-repeat;
+      padding: 60px 0 0;
+
+      img {
+        width: 1200px;
+        margin: 0 auto;
+        display: block;
       }
     }
   }
