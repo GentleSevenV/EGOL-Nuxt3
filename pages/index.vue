@@ -307,7 +307,7 @@ const [{ data: brandnews }, { data: indstynews }, { data: activitynews }] =
 
   .aboutus {
     h1 {
-      background: url("/images/index_aboutusbg.png") bottom left no-repeat;
+      background: url("/images/title_style1.png") bottom left no-repeat;
     }
 
     .flex-box {

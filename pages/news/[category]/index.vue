@@ -1,7 +1,12 @@
 <template>
   <div class="news">
     <NewsHeader></NewsHeader>
-    <el-tabs v-model="activeName" type="card" class="news-tabs" @tab-click="handleClick">
+    <el-tabs
+      v-model="activeName"
+      type="card"
+      class="news-tabs"
+      @tab-click="handleClick"
+    >
       <template v-for="item in newsTabs" :key="item.id">
         <el-tab-pane :label="item.label" :name="item.name"> </el-tab-pane>
       </template>
@@ -35,7 +40,9 @@ const newsTabs = reactive([
 
 // 根据路由中的category参数进行数据请求
 const category = route.params.category;
-const activeName = ref<string | number>(Array.isArray(category) ? category[0] : category);
+const activeName = ref<string | number>(
+  Array.isArray(category) ? category[0] : category
+);
 
 // 通过useState获取主导航中定义的全局状态
 // const activeNav = useState("menu");
@@ -78,7 +85,7 @@ const handleClick = (tab: TabsPaneContext) => {
 
 :deep(.el-tabs--card > .el-tabs__header) {
   background-color: #fff;
-  box-shadow: 0px 16px 18px 0px #e1e1e1;
+  box-shadow: 0px 10px 13px -8px #e1e1e1;
   border-bottom: none;
   height: 60px;
 }

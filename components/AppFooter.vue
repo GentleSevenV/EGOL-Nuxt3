@@ -9,13 +9,14 @@
           <Icon class="icon" name="icons:phonecall" /> 电话：19905609682
         </div>
         <div style="justify-content: flex-end">
-          <Icon class="icon" name="icons:location" /> 地址：中国·合肥市双凤经济开发区金淮路16号
+          <Icon class="icon" name="icons:location" />
+          地址：中国·合肥市双凤经济开发区金淮路16号
         </div>
       </div>
     </div>
     <div class="mid">
       <div class="mid-left">
-        <img src="/public/images/logo.png" />
+        <img src="/images/logo.png" />
         <p>输入微信手机号，快速获取EGOL品牌产品资料</p>
         <FooterForm></FooterForm>
       </div>
@@ -53,14 +54,20 @@
     <div class="btm">
       <div class="app">
         <div class="item wx">
-          <a class="item-link" to=""><Icon class="icon" name="icons:wechat" /></a>
-          <img src="/public/images/wwxin.jpg" />
+          <a class="item-link" to=""
+            ><Icon class="icon" name="icons:wechat"
+          /></a>
+          <img src="/images/wwxin.jpg" />
         </div>
         <a target="_blank" href="http://www.yigaojiaju.com" class="item"
           ><Icon class="icon" name="icons:weibo"
         /></a>
-        <a target="_blank" href="" class="item"><Icon class="icon" name="icons:qq" /></a>
-        <a target="_blank" href="" class="item"><Icon class="icon" name="icons:kf" /></a>
+        <a target="_blank" href="" class="item"
+          ><Icon class="icon" name="icons:qq"
+        /></a>
+        <a target="_blank" href="" class="item"
+          ><Icon class="icon" name="icons:kf"
+        /></a>
       </div>
       <div class="nav">
         <NuxtLink to="">关于易高</NuxtLink>
@@ -84,13 +91,16 @@
         href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34012102000074"
       >
         <img
-          src="/public/images/icpimage_03.png"
+          src="/images/icpimage_03.png"
           style="vertical-align: middle; display: inline-block"
         />
         &nbsp;皖公网安备&nbsp;34012102000074号
       </a>
       &nbsp;&nbsp;&nbsp;&nbsp;
-      <a style="color: #727272" target="_blank" href="https://beian.miit.gov.cn/"
+      <a
+        style="color: #727272"
+        target="_blank"
+        href="https://beian.miit.gov.cn/"
         >皖ICP备18023051号-1
       </a>
       &nbsp;&nbsp;&nbsp;&nbsp;投资有风险 选择需谨慎
@@ -109,7 +119,7 @@ const showFrilinks = () => {
 .footer {
   width: 100%;
   height: auto;
-  background: url(/public/images/footerbg.jpg) top center no-repeat;
+  background: url(/images/footerbg.jpg) top center no-repeat;
   background-size: 100% 100%;
 
   .top {

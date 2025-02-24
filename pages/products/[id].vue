@@ -1,7 +1,7 @@
 <template>
   <div class="products">
     <div class="header">
-      <img src="/public/images/qudz_banner.jpg" />
+      <img src="/images/qudz_banner.jpg" />
     </div>
     <div class="container">
       <div class="products-breadcrumb">
@@ -176,7 +176,7 @@
             <p style="margin: 0; font-size: 14px; color: #999">总建筑面积达</p>
           </div>
         </div>
-        <img src="/public/images/jd03.jpg" />
+        <img src="/images/jd03.jpg" />
       </div>
       <div id="anchor-3" class="anchor-section">
         <div class="section-title">
@@ -223,7 +223,7 @@
         </div>
         <div class="pj-con">
           <div class="pj-item">
-            <img src="/public/images/pj1.jpg" />
+            <img src="/images/pj1.jpg" />
             <div>
               <h3>HINGE</h3>
               <h4>德国海蒂诗门铰</h4>
@@ -250,10 +250,10 @@
                 </span>
               </p>
             </div>
-            <img src="/public/images/pj2.jpg" />
+            <img src="/images/pj2.jpg" />
           </div>
           <div class="pj-item">
-            <img src="/public/images/pj3.jpg" />
+            <img src="/images/pj3.jpg" />
             <div>
               <h3>TATAMI SUPPORT</h3>
               <h4>榻榻米支撑</h4>
@@ -279,10 +279,10 @@
                 </span>
               </p>
             </div>
-            <img src="/public/images/pj4.jpg" />
+            <img src="/images/pj4.jpg" />
           </div>
           <div class="pj-item">
-            <img src="/public/images/pj3.jpg" />
+            <img src="/images/pj3.jpg" />
             <div>
               <h3>HARDWARE HANDLE</h3>
               <h4>五金拉手</h4>
@@ -305,7 +305,7 @@
           <i>&nbsp;</i>
         </div>
 
-        <img src="/public/images/dzlc.png" />
+        <img src="/images/dzlc.png" />
       </div>
     </div>
   </div>
@@ -372,7 +372,7 @@ const swiper = useSwiper(thumbsSwiper, {
   }
 
   .container {
-    background: url(/public/images/ruler_bg.jpg) top center no-repeat;
+    background: url(/images/ruler_bg.jpg) top center no-repeat;
     background-size: 100% 15px;
     width: 100%;
     padding: 60px 0 0;
@@ -523,7 +523,7 @@ const swiper = useSwiper(thumbsSwiper, {
       max-width: 1920px;
       padding: 100px 0;
       margin: 0 auto;
-      background: url(/public/images/product_detail_bg.jpg) top center no-repeat;
+      background: url(/images/product_detail_bg.jpg) top center no-repeat;
 
       .brand-datas {
         display: flex;
@@ -619,7 +619,7 @@ const swiper = useSwiper(thumbsSwiper, {
       }
 
       .jd1 {
-        background: #f7f7f7 url(/public/images/jd1_bg.jpg) top right no-repeat;
+        background: #f7f7f7 url(/images/jd1_bg.jpg) top right no-repeat;
         height: 462px;
         padding: 0 50px;
         display: flex;
@@ -655,7 +655,7 @@ const swiper = useSwiper(thumbsSwiper, {
       }
 
       .jd2 {
-        background: #f7f7f7 url(/public/images/jd2_bg.jpg) top left no-repeat;
+        background: #f7f7f7 url(/images/jd2_bg.jpg) top left no-repeat;
         height: 462px;
         padding: 0 50px;
         margin-top: 15px;
@@ -700,7 +700,7 @@ const swiper = useSwiper(thumbsSwiper, {
       }
 
       .bc1 {
-        background: #f7f7f7 url(/public/images/bc1_bg.jpg) top right no-repeat;
+        background: #f7f7f7 url(/images/bc1_bg.jpg) top right no-repeat;
         height: 462px;
         display: -webkit-box;
         display: -ms-flexbox;
@@ -740,7 +740,7 @@ const swiper = useSwiper(thumbsSwiper, {
       }
 
       .bc2 {
-        background: #f7f7f7 url(/public/images/bc2_bg.jpg) top left no-repeat;
+        background: #f7f7f7 url(/images/bc2_bg.jpg) top left no-repeat;
         height: 462px;
         margin-top: 15px;
         display: -webkit-box;
@@ -787,7 +787,7 @@ const swiper = useSwiper(thumbsSwiper, {
       }
 
       .bc3 {
-        background: #f7f7f7 url(/public/images/bc3_bg.jpg) top right no-repeat;
+        background: #f7f7f7 url(/images/bc3_bg.jpg) top right no-repeat;
         height: 462px;
         margin-top: 15px;
         margin-bottom: 60px;
@@ -873,7 +873,7 @@ const swiper = useSwiper(thumbsSwiper, {
     .dzlc {
       width: 100%;
       height: 462px;
-      background: url(/public/images/dzlc_bg.jpg) top center no-repeat;
+      background: url(/images/dzlc_bg.jpg) top center no-repeat;
       padding: 60px 0 0;
 
       img {

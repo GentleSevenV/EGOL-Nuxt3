@@ -1,7 +1,7 @@
 <template>
   <div class="products">
     <div class="header">
-      <img src="/public/images/qudz_banner.jpg" />
+      <img src="/images/qudz_banner.jpg" />
     </div>
     <div class="container">
       <div class="page-title">
@@ -112,25 +112,34 @@ const total = ref<number | undefined>(0);
 const productsList = ref<IProductsList[] | undefined>([]);
 
 // 获取筛选器中各分类的数据
-const { data: filterDict } = await useFetch<DataResponsePageDict<IDict[]>>("/open/dict/info/data", {
-  method: "post",
-  body: { types: ["category", "style", "space"] },
-});
+const { data: filterDict } = await useFetch<DataResponsePageDict<IDict[]>>(
+  "/open/dict/info/data",
+  {
+    method: "post",
+    body: { types: ["category", "style", "space"] },
+  }
+);
 
 // 获取默认产品列表数据
-const { data } = await useFetch<DataResponsePage<IProductsList[]>>("/open/products/info/page", {
-  method: "post",
-  body: filterData,
-});
+const { data } = await useFetch<DataResponsePage<IProductsList[]>>(
+  "/open/products/info/page",
+  {
+    method: "post",
+    body: filterData,
+  }
+);
 
 productsList.value = data.value?.data.list;
 total.value = data.value?.data.pagination.total;
 
 const filterProduct = async (filterData: Ifilter) => {
-  const data = await $fetch<DataResponsePage<IProductsList[]>>("/open/products/info/page", {
-    method: "post",
-    body: filterData,
-  });
+  const data = await $fetch<DataResponsePage<IProductsList[]>>(
+    "/open/products/info/page",
+    {
+      method: "post",
+      body: filterData,
+    }
+  );
   // console.log(data);
   return data.data;
 };
@@ -204,7 +213,7 @@ const handleCurrentChange = (val: number) => {
 
   .container {
     width: 100%;
-    background: url(/public/images/qwdz_bg.jpg) top center no-repeat;
+    background: url(/images/qwdz_bg.jpg) top center no-repeat;
     background-size: 100% 100%;
     padding: 100px 0;
 

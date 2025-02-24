@@ -1,6 +1,6 @@
 <template>
   <div class="news-header">
-    <img src="/public/images/newscenter_banner.jpg" />
+    <img src="/images/newscenter_banner.jpg" />
   </div>
 </template>
 

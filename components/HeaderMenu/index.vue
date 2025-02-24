@@ -9,9 +9,14 @@
       router
     >
       <template v-for="item in navArr">
-        <template v-if="item.subNav?.length == 0 && item.value.startsWith('http')" :key="item.id">
+        <template
+          v-if="item.subNav?.length == 0 && item.value.startsWith('http')"
+          :key="item.id"
+        >
           <el-menu-item index="">
-            <a class="httplink" :href="item.value" target="_blank">{{ item.name }}</a>
+            <a class="httplink" :href="item.value" target="_blank">{{
+              item.name
+            }}</a>
           </el-menu-item>
         </template>
         <template v-else-if="item.subNav?.length == 0">
@@ -31,7 +36,9 @@
         </template>
       </template>
 
-      <el-menu-item> <Icon class="icon-phone" name="icons:phone" /> 400-057-9889 </el-menu-item>
+      <el-menu-item>
+        <Icon class="icon-phone" name="icons:phone" /> 400-057-9889
+      </el-menu-item>
     </el-menu>
   </div>
 </template>

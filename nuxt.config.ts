@@ -29,4 +29,11 @@ export default defineNuxtConfig({
       proxy: "http://127.0.0.1:8001/open/**",
     },
   },
+
+  // 如果使用下面的方法进行跨域，那么页面中的所有请求都必须携带baseUrl，例如：http://127.0.0.1:8001/open/dict/info/data，而不能只是 /open/dict/info/data
+  // devServer:{
+  //   cors: {
+  //     origin: ['http://127.0.0.1:8001'],
+  //   },
+  // }
 });
