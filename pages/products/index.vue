@@ -267,7 +267,7 @@ const handleCurrentChange = (val: number) => {
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(3, 380px); /* 每行3个，每个宽度为380px */
-      gap: 20px; /* 固定间距 */
+      gap: 30px; /* 固定间距 */
       justify-content: space-between; /* 子元素之间的间距自适应 */
 
       .item {

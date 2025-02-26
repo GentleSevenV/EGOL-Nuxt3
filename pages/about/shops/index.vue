@@ -1,29 +1,29 @@
 <template>
-  <div class="brandhonor">
+  <div class="shops">
     <AboutHeader />
     <div class="second-nav">
       <NuxtLink class="nav-item" to="/about/brandintro">品牌介绍</NuxtLink>
-      <NuxtLink class="nav-item active" to="/about/brandhonor"
-        >所获荣誉</NuxtLink
-      >
+      <NuxtLink class="nav-item" to="/about/brandhonor">所获荣誉</NuxtLink>
       <NuxtLink class="nav-item" to="/about/brandprogress">发展历程</NuxtLink>
-      <NuxtLink class="nav-item" to="/about/shops">专卖形象</NuxtLink>
+      <NuxtLink class="nav-item active" to="/about/shops">专卖形象</NuxtLink>
     </div>
     <div class="container">
       <div class="page-title">
-        <h2>荣誉证书</h2>
-        <p>行业与消费者双重认可</p>
+        <h2>易高整家定制全国专卖形象</h2>
+        <p>易高在全国各地有1000多家加盟商</p>
         <i></i>
       </div>
 
-      <div class="honor-list">
-        <template v-for="item in honorsList" :key="item.id">
-          <div>
-            <img :src="item.image" />
-            <p>
-              {{ item.name }}<i></i><span>颁发时间：{{ item.issueDate }}</span>
-            </p>
-          </div>
+      <div class="shops-list">
+        <template v-for="item in shopsList" :key="item.id">
+          <NuxtLink class="item" :to="`/about/shops/${item.id}`">
+            <div>
+              <img :src="item.image" />
+              <p>
+                {{ item.name }}
+              </p>
+            </div>
+          </NuxtLink>
         </template>
       </div>
 
@@ -46,14 +46,13 @@
 </template>
 
 <script lang="ts" setup>
-interface IHonor {
+interface IShops {
   id: number;
   name: string;
   image: string;
-  issueDate: string;
 }
 
-const honorsList = ref<IHonor[] | undefined>([]);
+const shopsList = ref<IShops[] | undefined>([]);
 const total = ref<number | undefined>(0);
 
 // 设置默认分页请求参数
@@ -69,8 +68,8 @@ const pageData = reactive<IPage>({
 });
 
 // 获取默认列表数据
-const { data } = await useFetch<DataResponsePage<IHonor[]>>(
-  "/open/honor/info/page",
+const { data } = await useFetch<DataResponsePage<IShops[]>>(
+  "/open/shops/info/page",
   {
     method: "post",
     body: pageData,
@@ -80,13 +79,14 @@ const { data } = await useFetch<DataResponsePage<IHonor[]>>(
 if (data.value == null) {
   console.log("荣誉为空！");
 } else {
-  honorsList.value = data.value.data.list;
+  // console.log(data.value);
+  shopsList.value = data.value.data.list;
   total.value = data.value.data.pagination.total;
 }
 
-const getHonorsList = async (newPageData: IPage) => {
-  const data = await $fetch<DataResponsePage<IHonor[]>>(
-    "/open/honor/info/page",
+const getShopsList = async (newPageData: IPage) => {
+  const data = await $fetch<DataResponsePage<IShops[]>>(
+    "/open/shops/info/page",
     {
       method: "post",
       body: newPageData,
@@ -98,15 +98,15 @@ const getHonorsList = async (newPageData: IPage) => {
 
 const handleSizeChange = (val: number) => {
   pageData.size = val;
-  getHonorsList(pageData).then((res) => {
-    honorsList.value = res.list;
+  getShopsList(pageData).then((res) => {
+    shopsList.value = res.list;
     total.value = res.pagination.total;
   });
 };
 const handleCurrentChange = (val: number) => {
   pageData.page = val;
-  getHonorsList(pageData).then((res) => {
-    honorsList.value = res.list;
+  getShopsList(pageData).then((res) => {
+    shopsList.value = res.list;
     total.value = res.pagination.total;
   });
 };
@@ -174,20 +174,21 @@ const handleCurrentChange = (val: number) => {
     }
   }
 
-  .honor-list {
+  .shops-list {
     width: 1200px;
     margin: 30px auto;
     display: grid;
-    grid-template-columns: repeat(3, 360px); /* 每行3个，每个宽度为380px */
+    grid-template-columns: repeat(3, 380px); /* 每行3个，每个宽度为380px */
+    gap: 20px; /* 固定间距 */
     justify-content: space-between; /* 子元素之间的间距自适应 */
 
     div {
       width: 360px;
       background-color: #fff;
       box-sizing: border-box;
-      padding: 20px;
       margin-bottom: 30px;
       border-bottom: 2px solid #f9c152;
+      cursor: pointer;
 
       img {
         width: 100%;
@@ -199,13 +200,7 @@ const handleCurrentChange = (val: number) => {
         color: #333;
         text-align: center;
         margin-top: 15px;
-
-        i {
-          width: 50px;
-          margin: 10px auto 15px;
-          display: block;
-          border-top: 1px solid #f9c152;
-        }
+        padding-bottom: 15px;
       }
     }
   }

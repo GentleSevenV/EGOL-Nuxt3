@@ -7,7 +7,7 @@
       >
       <NuxtLink class="nav-item" to="/about/brandhonor">所获荣誉</NuxtLink>
       <NuxtLink class="nav-item" to="/about/brandprogress">发展历程</NuxtLink>
-      <NuxtLink class="nav-item" to="/about/stores">专卖形象</NuxtLink>
+      <NuxtLink class="nav-item" to="/about/shops">专卖形象</NuxtLink>
     </div>
     <div class="section intro">
       <div class="factory">
