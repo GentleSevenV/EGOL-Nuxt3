@@ -155,13 +155,31 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
       })
         .then((res) => {
           if (res.code == 1000) {
+            ElMessage({
+              message:
+                "您的信息已成功提交, 24小时内会有工作人员和您联系，请保持手机畅通。",
+              type: "success",
+              showClose: true,
+              duration: 0,
+            });
+
+            formEl.resetFields();
           }
         })
         .catch((err) => {
-          console.log("提交失败！" + err);
+          ElMessage({
+            message: "请按照页面提示填写相关信息。",
+            type: "error",
+            showClose: true,
+            duration: 0,
+          });
         });
     } else {
-      console.log("error submit!", fields);
+      // console.log("error submit!", fields);
+      ElMessage({
+        message: "请按照页面提示填写相关信息。",
+        type: "error",
+      });
     }
   });
 };
