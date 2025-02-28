@@ -1,7 +1,12 @@
 declare interface DataResponse<T> {
-  code: string;
+  code: number;
   message?: string;
   data: T;
+}
+
+interface IMessage{
+  id: number;
+  // 如果data还包含其他属性，继续在这里添加
 }
 
 interface IPagination {
@@ -11,7 +16,7 @@ interface IPagination {
 }
 
 interface DataResponsePage<T> {
-  code: string;
+  code: number;
   data: { list: T; pagination: IPagination };
   message: string;
 }
@@ -26,7 +31,7 @@ interface IDict {
 }
 
 interface DataResponsePageDict<T> {
-  code: string;
+  code: number;
   data: {
     category?: T;
     style?: T;

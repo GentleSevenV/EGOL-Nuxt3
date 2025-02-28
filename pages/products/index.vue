@@ -120,12 +120,12 @@ const { data: filterDict } = await useFetch<DataResponsePageDict<IDict[]>>(
   }
 );
 
-// 获取默认产品列表数据
+// 获取默认产品列表数据时，请求参数不能使用filterData响应式数据，否则在点击不同的radio时会重复发送网络请求，因为
 const { data } = await useFetch<DataResponsePage<IProductsList[]>>(
   "/open/products/info/page",
   {
     method: "post",
-    body: filterData,
+    body: { page: 1, size: 9, status: 1 },
   }
 );
 
@@ -144,15 +144,14 @@ const filterProduct = async (filterData: Ifilter) => {
   return data.data;
 };
 
-const categoryChange = (val: string | number | boolean | undefined) => {
-  // console.log(val);
+const categoryChange = async (val: string | number | boolean | undefined) => {
+  console.log("打印第一次！");
   if (val === 0) {
     filterData.category = null;
   } else {
     filterData.category = val;
   }
 
-  // console.log(filterData);
   filterProduct(filterData).then((res) => {
     productsList.value = res.list;
     total.value = res.pagination.total;
