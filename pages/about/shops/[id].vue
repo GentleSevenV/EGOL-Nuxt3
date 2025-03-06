@@ -42,33 +42,37 @@
           </h5>
         </div>
         <div>
-          <el-form :inline="true" :model="formInline" class="form-inline">
-            <el-form-item label="">
+          <el-form
+            :inline="true"
+            :model="formInline"
+            :rules="rules"
+            status-icon
+            ref="ruleFormRef"
+            class="form-inline"
+          >
+            <el-form-item prop="name">
               <el-input
                 size="large"
                 v-model="formInline.name"
                 placeholder="请输入您的姓名"
-                clearable
               />
             </el-form-item>
-            <el-form-item label="">
+            <el-form-item prop="phone">
               <el-input
                 size="large"
                 v-model="formInline.phone"
                 placeholder="请输入您的电话"
-                clearable
               />
             </el-form-item>
 
-            <el-form-item label="">
+            <el-form-item prop="code">
               <el-input
                 size="large"
-                v-model="inputCode"
+                v-model="formInline.code"
                 placeholder="输入验证码"
-                clearable
               />
             </el-form-item>
-            <el-form-item label="">
+            <el-form-item>
               <div
                 class="captchasvg"
                 v-html="captchaSVG"
@@ -76,7 +80,10 @@
               ></div>
             </el-form-item>
             <el-form-item>
-              <el-button size="large" type="primary" @click="onSubmit"
+              <el-button
+                size="large"
+                type="primary"
+                @click="onSubmit(ruleFormRef)"
                 >立即预约</el-button
               >
             </el-form-item>
@@ -103,6 +110,7 @@
 </template>
 
 <script lang="ts" setup>
+import type { FormInstance, FormRules } from "element-plus";
 const route = useRoute();
 const shopId = route.params.id;
 
@@ -121,7 +129,37 @@ const { data: shopInfo } = await useFetch<DataResponse<IShopInfo>>(
 );
 
 const captchaSVG = ref("");
-const inputCode = ref("");
+// const inputCode = ref("");
+
+const formInline = reactive({
+  name: "",
+  phone: "",
+  code: "",
+});
+
+const ruleFormRef = ref<FormInstance>();
+
+const checkCode = (rule: any, value: any, callback: any) => {
+  if (!value) {
+    return callback(new Error("请输入验证码！"));
+  }
+  verify().then((res) => {
+    if (res == false) {
+      return callback(new Error("验证码错误，请重新输入。"));
+    } else {
+      callback();
+    }
+  });
+};
+
+const rules = reactive({
+  name: [
+    { required: true, message: "请输入正确的名称", trigger: "blur" },
+    { min: 2, max: 5, message: "名称的长度为2~5个字符", trigger: "blur" },
+  ],
+  phone: [{ required: true, message: "请输入正确的手机号码", trigger: "blur" }],
+  code: [{ validator: checkCode, trigger: "blur" }],
+});
 
 // 获取验证码
 const refreshCaptcha = async () => {
@@ -133,20 +171,54 @@ const refreshCaptcha = async () => {
 const verify = async () => {
   const data = await $fetch("/api/verify", {
     method: "POST",
-    body: { code: inputCode.value },
+    body: { code: formInline.code },
   });
-  alert(data.valid ? "验证成功" : "验证失败");
+
+  return data.valid;
+  // alert(data.valid ? "验证成功" : "验证失败");
 };
 
 refreshCaptcha();
 
-const formInline = reactive({
-  name: "",
-  phone: "",
-});
+const onSubmit = (formEl: FormInstance | undefined) => {
+  if (!formEl) return;
+  formEl.validate((valid) => {
+    if (valid) {
+      $fetch<DataResponse<IMessage>>(`/open/messages/appointment/add`, {
+        method: "post",
+        body: {
+          name: formInline.name,
+          phone: formInline.phone,
+        },
+      })
+        .then((res) => {
+          if (res.code == 1000) {
+            ElMessage({
+              message:
+                "您的信息已成功提交, 24小时内会有工作人员和您联系，请保持手机畅通。",
+              type: "success",
+              showClose: true,
+              duration: 0,
+            });
 
-const onSubmit = () => {
-  console.log("submit!");
+            formEl.resetFields();
+          }
+        })
+        .catch((err) => {
+          ElMessage({
+            message: "请按照页面提示填写相关信息。",
+            type: "error",
+            showClose: true,
+            duration: 0,
+          });
+        });
+    } else {
+      ElMessage({
+        message: "表单验证未通过，请按照页面提示填写相关信息。",
+        type: "error",
+      });
+    }
+  });
 };
 </script>
 

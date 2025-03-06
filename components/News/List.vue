@@ -55,42 +55,51 @@ const totalNews = ref(0);
 const newslist = ref<INewsType[] | undefined>([]);
 
 // 2.根据传递过来的activeName值来获取对应分类的news数据
-const { data } = await useFetch<DataResponsePage<INewsType[]>>("/open/news/info/page", {
-  method: "post",
-  body: {
-    category: props.activeName,
-    status: 1,
-    page: currentPage.value,
-    size: pageSize.value,
-  },
-});
+const { data } = await useFetch<DataResponsePage<INewsType[]>>(
+  "/open/news/info/page",
+  {
+    method: "post",
+    body: {
+      category: props.activeName,
+      status: 1,
+      page: currentPage.value,
+      size: pageSize.value,
+    },
+  }
+);
 
 newslist.value = data.value?.data.list;
 totalNews.value = data.value?.data.pagination.total as number;
 
 const handleSizeChange = async (val: number) => {
-  const { data } = await $fetch<DataResponsePage<INewsType[]>>("/open/news/info/page", {
-    method: "post",
-    body: {
-      category: props.activeName,
-      status: 1,
-      page: currentPage.value,
-      size: pageSize.value,
-    },
-  });
+  const { data } = await $fetch<DataResponsePage<INewsType[]>>(
+    "/open/news/info/page",
+    {
+      method: "post",
+      body: {
+        category: props.activeName,
+        status: 1,
+        page: currentPage.value,
+        size: pageSize.value,
+      },
+    }
+  );
   newslist.value = data.list;
 };
 
 const handleCurrentChange = async (val: number) => {
-  const { data } = await $fetch<DataResponsePage<INewsType[]>>("/open/news/info/page", {
-    method: "post",
-    body: {
-      category: props.activeName,
-      status: 1,
-      page: currentPage.value,
-      size: pageSize.value,
-    },
-  });
+  const { data } = await $fetch<DataResponsePage<INewsType[]>>(
+    "/open/news/info/page",
+    {
+      method: "post",
+      body: {
+        category: props.activeName,
+        status: 1,
+        page: currentPage.value,
+        size: pageSize.value,
+      },
+    }
+  );
   newslist.value = data.list;
 };
 </script>

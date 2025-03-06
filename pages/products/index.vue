@@ -120,7 +120,7 @@ const { data: filterDict } = await useFetch<DataResponsePageDict<IDict[]>>(
   }
 );
 
-// 获取默认产品列表数据时，请求参数不能使用filterData响应式数据，否则在点击不同的radio时会重复发送网络请求，因为
+// 获取默认产品列表数据时，请求参数不能使用filterData响应式数据，否则在点击不同的radio时会重复发送网络请求
 const { data } = await useFetch<DataResponsePage<IProductsList[]>>(
   "/open/products/info/page",
   {
