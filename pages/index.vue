@@ -12,12 +12,14 @@
               <p class="slogan">专业环保定制，整家一体交付</p>
               <h2>拥有21年全屋定制家居经验的大品牌</h2>
               <p>
-                易高家居有限公司创建于2004年，是一家集研发、设计、生产、销售、服务于一体的大型全屋家居企业，总部位于安徽合肥。公司先后荣获中国环境标志产品认证、全国工商联定制家居专业委员会理事单位、质量管理体系认证、国家高新技术企业认证、专精特新企业、定制行业百强等诸多荣誉。<br />
+                易高家居有限公司（品牌）创建于2004年，是一家集研发、设计、生产、销售、服务于一体的大型全屋家居企业，总部位于安徽合肥。公司先后荣获中国环境标志产品认证、全国工商联定制家居专业委员会副会长单位、质量管理体系认证、国家高新技术企业认证、专精特新企业、定制行业百强等诸多荣誉。<br />
                 公司拥有10万㎡合肥双凤生产基地及21万㎡合肥下塘生产基地，同时与德国豪迈、德国海蒂诗、奥地利爱格等供应商品牌达成战略合作，全面整合优质供应链，确保高效的订单交付能力及高品质产品输出，确保用户核心利益。<br />
                 公司在扩大产能的同时，进一步加强终端门店建设，凭借选商育商的招商态度和强大的终端运营保障能力，目前全国在营专卖店数量突破1000户。<br />
-                作为中国全品类全屋定制类企业，易高始终坚持“专业环保定制，整家一体交付”的品牌理念，致力于为亿万家庭提供整家生活方式解决方案！
+                作为中国全品类全屋整家企业，易高始终坚持“专业环保定制，整家一体交付”的品牌理念，致力于为亿万家庭提供整家生活方式解决方案！
               </p>
-              <NuxtLink class="more" to="/about/brandintro">了解更多</NuxtLink>
+              <NuxtLink class="more" to="/about/brandintro.html"
+                >了解更多</NuxtLink
+              >
             </div>
 
             <div class="building-pic">
@@ -48,7 +50,7 @@
                       <span>{{ label }}</span>
                     </template>
                     <div class="probtn">
-                      <NuxtLink class="more" :to="`/products/${item.id}`"
+                      <NuxtLink class="more" :to="`/products/${item.id}.html`"
                         >了解更多</NuxtLink
                       >
                     </div>
@@ -93,7 +95,9 @@
                 >打造易高整家定制销售、安装、售后等一站式服务体验终端矩阵</span
               >
             </p>
-            <NuxtLink class="more" to="/about/brandintro">了解更多</NuxtLink>
+            <NuxtLink class="more" to="/about/brandintro.html"
+              >了解更多</NuxtLink
+            >
           </div>
         </div>
       </div>
@@ -107,7 +111,7 @@
                 <div class="news-list">
                   <template v-for="item in brandnews?.data.list" :key="item.id">
                     <div class="news-item">
-                      <NuxtLink :to="`/news/${item.category}/${item.id}`">
+                      <NuxtLink :to="`/news/${item.category}/${item.id}.html`">
                         <img :src="item.coverImage" />
                         <span class="news-time">{{
                           item.createTime.slice(0, 11)
@@ -133,7 +137,7 @@
                     v-for="item in indstynews?.data.list"
                     :key="item.id"
                   >
-                    <NuxtLink :to="`/news/${item.category}/${item.id}`">
+                    <NuxtLink :to="`/news/${item.category}/${item.id}.html`">
                       <div class="news-item">
                         <img :src="item.coverImage" />
                         <span class="news-time">{{
@@ -160,7 +164,7 @@
                     v-for="item in activitynews?.data.list"
                     :key="item.id"
                   >
-                    <NuxtLink :to="`/news/${item.category}/${item.id}`">
+                    <NuxtLink :to="`/news/${item.category}/${item.id}.html`">
                       <div class="news-item">
                         <img :src="item.coverImage" />
                         <span class="news-time">{{

@@ -2,10 +2,14 @@
   <div class="shops">
     <AboutHeader />
     <div class="second-nav">
-      <NuxtLink class="nav-item" to="/about/brandintro">品牌介绍</NuxtLink>
-      <NuxtLink class="nav-item" to="/about/brandhonor">所获荣誉</NuxtLink>
-      <NuxtLink class="nav-item" to="/about/brandprogress">发展历程</NuxtLink>
-      <NuxtLink class="nav-item active" to="/about/shops">专卖形象</NuxtLink>
+      <NuxtLink class="nav-item" to="/about/brandintro.html">品牌介绍</NuxtLink>
+      <NuxtLink class="nav-item" to="/about/brandhonor.html">所获荣誉</NuxtLink>
+      <NuxtLink class="nav-item" to="/about/brandprogress.html"
+        >发展历程</NuxtLink
+      >
+      <NuxtLink class="nav-item active" to="/about/shops.html"
+        >专卖形象</NuxtLink
+      >
     </div>
     <div class="container">
       <div class="page-title">
@@ -16,7 +20,7 @@
 
       <div class="shops-list">
         <template v-for="item in shopsList" :key="item.id">
-          <NuxtLink class="item" :to="`/about/shops/${item.id}`">
+          <NuxtLink class="item" :to="`/about/shops/${item.id}.html`">
             <div>
               <img :src="item.image" />
               <p>

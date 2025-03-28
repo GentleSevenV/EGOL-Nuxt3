@@ -42,7 +42,7 @@
       <div v-if="productsList?.length != 0">
         <div class="products-list">
           <template v-for="item in productsList" :key="item.id">
-            <NuxtLink class="item" :to="`/products/${item.id}`">
+            <NuxtLink class="item" :to="`/products/${item.id}.html`">
               <h3>{{ item.name }}</h3>
               <i></i>
               <img :src="item.coverImage" />

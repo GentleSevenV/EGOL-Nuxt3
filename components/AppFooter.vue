@@ -23,7 +23,7 @@
       <div class="mid-right">
         <div class="service-item">
           <p>专属服务</p>
-          <NuxtLink to="">免费量尺设计</NuxtLink>
+          <NuxtLink to="/free/design.html">免费量尺设计</NuxtLink>
           <NuxtLink to="">免费标准配送</NuxtLink>
           <NuxtLink to="">免费安装调试</NuxtLink>
         </div>
@@ -70,13 +70,17 @@
         /></a>
       </div>
       <div class="nav">
-        <NuxtLink to="">关于易高</NuxtLink>
-        <NuxtLink to="">全屋定制</NuxtLink>
-        <NuxtLink to="">资讯中心</NuxtLink>
-        <NuxtLink to="">合作共赢</NuxtLink>
-        <a target="_blank" href="">全景展厅</a>
-        <NuxtLink to="">易高商学院</NuxtLink>
-        <NuxtLink to="">联系我们</NuxtLink>
+        <NuxtLink to="/about/brandintro.html">关于易高</NuxtLink>
+        <NuxtLink to="/products.html">产品中心</NuxtLink>
+        <NuxtLink to="/news/brandnews.html">资讯中心</NuxtLink>
+        <NuxtLink to="/join.html">合作共赢</NuxtLink>
+        <a
+          target="_blank"
+          href="https://www.720yun.com/t/94vk6yfws2h?scene_id=102096647"
+          >全景展厅</a
+        >
+        <NuxtLink to="/school.html">易高商学院</NuxtLink>
+        <NuxtLink to="/contactus.html">联系我们</NuxtLink>
       </div>
       <div class="fri-link" @click="showFrilinks">
         友情链接&nbsp;<Icon class="icon" name="icons:down" />
@@ -199,6 +203,10 @@ const showFrilinks = () => {
           font-size: 14px;
           color: #727272;
           margin-bottom: 15px;
+
+          &:hover {
+            color: var(--theme-color);
+          }
         }
       }
     }
@@ -281,6 +289,10 @@ const showFrilinks = () => {
 
       a {
         color: #727272;
+
+        &:hover {
+          color: var(--theme-color);
+        }
       }
     }
 

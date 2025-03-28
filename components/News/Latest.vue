@@ -4,7 +4,7 @@
       <h4>最新资讯</h4>
 
       <template v-for="item in latestnews?.data.list" :key="item.id">
-        <NuxtLink :to="`/news/${item.category}/${item.id}`">
+        <NuxtLink :to="`/news/${item.category}/${item.id}.html`">
           <div class="latest-item">
             <div class="news-pic">
               <img :src="item.coverImage" />
@@ -35,15 +35,18 @@ interface INewsType {
   createTime: string;
 }
 
-const { data: latestnews } = await useFetch<DataResponsePage<INewsType[]>>("/open/news/info/page", {
-  method: "post",
-  body: {
-    category: category,
-    status: 1,
-    page: 1,
-    size: 8,
-  },
-});
+const { data: latestnews } = await useFetch<DataResponsePage<INewsType[]>>(
+  "/open/news/info/page",
+  {
+    method: "post",
+    body: {
+      category: category,
+      status: 1,
+      page: 1,
+      size: 8,
+    },
+  }
+);
 </script>
 <style lang="less" scoped>
 .related-news {

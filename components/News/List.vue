@@ -3,7 +3,7 @@
     <div class="news-list-con">
       <template v-for="item in newslist" :key="item.id">
         <div class="news-item">
-          <NuxtLink :to="`/news/${item.category}/${item.id}`">
+          <NuxtLink :to="`/news/${item.category}/${item.id}.html`">
             <img :src="item.coverImage" />
             <h4>{{ item.title }}</h4>
             <span>{{ item.createTime }}</span>

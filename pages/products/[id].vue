@@ -7,8 +7,8 @@
       <div class="products-breadcrumb">
         <el-breadcrumb :separator-icon="ArrowRight">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/products' }">
-            整家定制
+          <el-breadcrumb-item :to="{ path: '/products.html' }">
+            产品中心
           </el-breadcrumb-item>
           <el-breadcrumb-item>{{ productInfo?.data.name }}</el-breadcrumb-item>
         </el-breadcrumb>

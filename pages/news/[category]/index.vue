@@ -52,7 +52,7 @@ const handleClick = (tab: TabsPaneContext) => {
     activeName.value = tab.paneName;
     // 当点击此页面中的二级导航的同时也要进行对主导航状态的修改，以达到联动效果
     // activeNav.value = `/news/${tab.paneName}`;
-    router.push(`/news/${tab.paneName}`);
+    router.push(`/news/${tab.paneName}.html`);
   }
 };
 </script>

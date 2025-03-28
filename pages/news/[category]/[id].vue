@@ -1,7 +1,12 @@
 <template>
   <div class="news">
     <NewsHeader></NewsHeader>
-    <el-tabs v-model="activeName" type="card" class="news-tabs" @tab-click="handleClick">
+    <el-tabs
+      v-model="activeName"
+      type="card"
+      class="news-tabs"
+      @tab-click="handleClick"
+    >
       <template v-for="item in newsTabs" :key="item.id">
         <el-tab-pane :label="item.label" :name="item.name"> </el-tab-pane>
       </template>
@@ -26,7 +31,9 @@ const newsTabs = reactive([
 
 // 根据路由中的category参数进行数据请求
 const category = route.params.category;
-const activeName = ref<string | number>(Array.isArray(category) ? category[0] : category);
+const activeName = ref<string | number>(
+  Array.isArray(category) ? category[0] : category
+);
 
 // 通过useState获取主导航中定义的全局状态
 // const activeNav = useState("menu");
@@ -36,7 +43,7 @@ const handleClick = (tab: TabsPaneContext) => {
     activeName.value = tab.paneName;
     // 当点击此页面中的二级导航的同时也要进行对主导航状态的修改，以达到联动效果
     // activeNav.value = `/news/${tab.paneName}`;
-    router.push(`/news/${tab.paneName}`);
+    router.push(`/news/${tab.paneName}.html`);
   }
 };
 </script>

@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: {
-    enabled: true,
+    enabled: false,
     timeline: {
       enabled: true,
     },
@@ -36,4 +36,15 @@ export default defineNuxtConfig({
   //     origin: ['http://127.0.0.1:8001'],
   //   },
   // }
+
+  // 伪静态处理：使用nuxt3提供的钩子函数'pages:extend'获取到页面路由被扫描之后生成的pages数组，然后修改页面路由不为'/'时，给其他所有路由添加.html结尾，之后在页面或者组件中进行路由跳转的时候记得也要带上.html结尾，否则会报错提示找不到路由。
+  hooks:{
+    'pages:extend'(pages){
+      pages.forEach((page)=>{
+        if (page.path !== '/') {
+          page.path = `${page.path}.html`;
+        }
+      })
+    }
+  }
 });
