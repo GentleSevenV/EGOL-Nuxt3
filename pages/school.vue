@@ -56,7 +56,7 @@
                 {{ item.title }}<span>{{ item.description }}</span>
               </div>
               <div>
-                <NuxtLink :to="`/news/${item.category}/${item.id}`"
+                <NuxtLink :to="`/news/${item.category}/${item.id}.html`"
                   >查看详情</NuxtLink
                 >
               </div>
@@ -127,8 +127,9 @@
           <a
             href="http://p.qiao.baidu.com/cps/chat?siteId=12887600&amp;userId=26908502&amp;siteToken=410b9dac4b1169822b6e70c7d40bb238"
             target="_blank"
-            >免费预约</a
           >
+            免费预约
+          </a>
         </div>
       </div>
     </div>
@@ -136,6 +137,21 @@
 </template>
 
 <script lang="ts" setup>
+useHead({
+  title: "易高整家定制(EGOL全屋定制)集团商学院导师介绍",
+  meta: [
+    {
+      name: "description",
+      content:
+        "易高整家定制商学院导师介绍，包括商学院教学内容，讲师等，其中有行业知名的营销专家，也有设计专家，充分体现易高定制家居的品牌软实力！",
+    },
+    {
+      name: "keywords",
+      content: "易高定制家居集团商学院导师介绍",
+    },
+  ],
+});
+
 interface INewsType {
   id: number;
   title: string;

@@ -2,26 +2,36 @@
   <div>
     <FreeHeader />
     <div class="second-nav">
-      <NuxtLink class="nav-item active" to="/free/design.html">
-        免费量尺设计
+      <NuxtLink class="nav-item active" to="/help/process.html">
+        定制流程
       </NuxtLink>
-      <NuxtLink class="nav-item" to="/free/delivery.html">
-        免费标准配送
-      </NuxtLink>
-      <NuxtLink class="nav-item" to="/free/assemble.html">
-        免费安装调试
+      <NuxtLink class="nav-item" to="/help/antifake.html"> 产品防伪 </NuxtLink>
+      <NuxtLink class="nav-item" to="/help/aftersale.html"> 产品售后 </NuxtLink>
+      <NuxtLink class="nav-item" to="/help/maintenance.html">
+        维修保养
       </NuxtLink>
     </div>
-    <div class="section design">
-      <h2>免费量尺设计</h2>
-      <p>坚持“量”心定制理念 并以此为品牌价值观</p>
+    <div class="section help">
+      <h2>定制流程</h2>
+      <p>一步轻松打造梦想家</p>
       <i>&nbsp;</i>
-      <div>
+      <div class="content con1">
         <p>
-          量尺设计
+          简于流程，重于服务
           <i>&nbsp;</i>
           <span>
-            易高整家定制为您提供三免服务，免费量尺设计：预约成功后，店面将与48小时内联系您，与您预约量尺时间，在量尺过程中，设计师会针对户型特点、生活习惯、居室成员、储物需求等情况与您沟通，您可把具体需求告知设计师，若您对效果图不满意，可提出相关建议，设计师将结合您的建议进行修改，使家具设计尽量符合您的预期。
+            易高整家定制为您提供免费的专业设计师上门量房设计服务，您可以通过以下3种办法（电话预约、在线咨询预约、在线申请预约）进行预约。预约成功之后我们将安排设计师上门量房，为您免费提供“上门量房+家具配套设计”服务!
+          </span>
+        </p>
+      </div>
+      <div class="content con2">
+        <p>
+          预约方式
+          <i>&nbsp;</i>
+          <span>
+            电话预约：400-0579-889<br />
+            在线咨询预约：点击右侧咨询按钮或弹窗预约9<br />
+            在线申请预约：点击联系我们预约
           </span>
         </p>
       </div>
@@ -32,7 +42,7 @@
 
 <script lang="ts" setup>
 useHead({
-  title: "免费量尺设计",
+  title: "定制流程",
   meta: [
     {
       name: "description",
@@ -80,7 +90,7 @@ useHead({
   }
 }
 
-.design {
+.help {
   width: 1200px;
   margin: 0 auto;
   padding: 60px 0 110px;
@@ -107,8 +117,7 @@ useHead({
     margin: 0 auto;
   }
 
-  & > div {
-    background: #f7f7f7 url(/images/free_design_bg.jpg) top left no-repeat;
+  .content {
     height: 396px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -116,8 +125,6 @@ useHead({
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    justify-content: flex-end;
-    padding-right: 120px;
     margin-top: 16px;
 
     p {
@@ -142,6 +149,18 @@ useHead({
         font-weight: normal;
       }
     }
+  }
+
+  .con1 {
+    background: #f7f7f7 url(/images/help_process_bg1.jpg) top left no-repeat;
+    justify-content: flex-end;
+    padding-right: 120px;
+  }
+
+  .con2 {
+    background: #f7f7f7 url(/images/help_process_bg2.jpg) top right no-repeat;
+    justify-content: flex-start;
+    padding-left: 120px;
   }
 }
 </style>

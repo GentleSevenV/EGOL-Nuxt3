@@ -50,6 +50,21 @@
 </template>
 
 <script lang="ts" setup>
+useHead({
+  title: "易高整家定制(EGOL全屋定制)全国专卖店形象展示",
+  meta: [
+    {
+      name: "description",
+      content:
+        "易高整家定制全国专卖店形象展示页面，主要包括易高定制家居在全国各地的专卖店形象，为一部分展示，主要体现易高定制家居品牌形象的统一性，唯一性及官方性质！",
+    },
+    {
+      name: "keywords",
+      content: "易高整家定制(EGOL全屋定制)全国专卖店形象展示",
+    },
+  ],
+});
+
 interface IShops {
   id: number;
   name: string;

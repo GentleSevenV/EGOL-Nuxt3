@@ -1,7 +1,9 @@
 <template>
   <div class="links-box">
     <template v-for="item in friendlyLinks?.data" :key="item.id">
-      <a class="links" target="_blank" :href="item.link">{{ item.name }}</a>
+      <a class="links" target="_blank" :href="item.link">{{
+        item.name
+      }}</a>
     </template>
   </div>
 </template>
@@ -13,9 +15,12 @@ interface ILink {
   link: string;
 }
 
-const { data: friendlyLinks } = await useFetch<DataResponse<ILink[]>>("/open/friendly/info/list", {
-  method: "post",
-});
+const { data: friendlyLinks } = await useFetch<DataResponse<ILink[]>>(
+  "/open/friendly/info/list",
+  {
+    method: "post",
+  }
+);
 </script>
 <style lang="less" scoped>
 .links-box {

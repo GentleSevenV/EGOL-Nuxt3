@@ -80,6 +80,23 @@
 </template>
 
 <script lang="ts" setup>
+useHead({
+  title:
+    "易高整家定制产品-衣柜效果图片,橱柜效果图片,全屋定制家具效果图片,榻榻米效果图片大全",
+  meta: [
+    {
+      name: "description",
+      content:
+        "最具代表性的衣柜效果图、衣帽间效果图、酒柜效果图、书柜效果图、榻榻米效果图、儿童房效果图等内容，全部产品均为易高定制家居研发部门原创设计，涵盖了易高定制家居全品类产品的主要组成部分。想看最新衣柜效果图片,橱柜效果图片,定制家具效果图片,榻榻米效果图片大全，就上易高定制家居官网！",
+    },
+    {
+      name: "keywords",
+      content:
+        "易高定制家具,衣柜效果图片,橱柜效果图片,定制家具效果图片,榻榻米效果图片大全",
+    },
+  ],
+});
+
 interface IProductsList {
   id: number;
   name: string;
@@ -145,7 +162,7 @@ const filterProduct = async (filterData: Ifilter) => {
 };
 
 const categoryChange = async (val: string | number | boolean | undefined) => {
-  console.log("打印第一次！");
+  // console.log("打印第一次！");
   if (val === 0) {
     filterData.category = null;
   } else {

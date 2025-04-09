@@ -1,8 +1,8 @@
 <template>
   <div class="news-details">
-    <h2 class="news-title">{{ newslist?.data.title }}</h2>
-    <span class="news-time">发布时间：{{ newslist?.data.createTime }}</span>
-    <div class="news-content" v-html="newslist?.data.content"></div>
+    <h2 class="news-title">{{ newsDetails?.data.title }}</h2>
+    <span class="news-time">发布时间：{{ newsDetails?.data.createTime }}</span>
+    <div class="news-content" v-html="newsDetails?.data.content"></div>
   </div>
 </template>
 
@@ -13,6 +13,7 @@ interface INewsType {
   category: string;
   content: string;
   description: string;
+  keywords: string;
   coverImage: string;
   createTime: string;
 }
@@ -21,12 +22,26 @@ const route = useRoute();
 const newsId = route.params.id;
 
 // 注意：这里网络请求返回的是一个INewsType对象而不是一个INewsType数组
-const { data: newslist } = await useFetch<DataResponse<INewsType>>(
+const { data: newsDetails } = await useFetch<DataResponse<INewsType>>(
   `/open/news/info/info?id=${newsId}`,
   {
     method: "get",
   }
 );
+
+useHead({
+  title: `${newsDetails.value?.data.title}`,
+  meta: [
+    {
+      name: "description",
+      content: `${newsDetails.value?.data.description}`,
+    },
+    {
+      name: "keywords",
+      content: `${newsDetails.value?.data.keywords}`,
+    },
+  ],
+});
 
 // console.log(newslist.value);
 </script>

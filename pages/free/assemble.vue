@@ -29,7 +29,22 @@
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+useHead({
+  title: "免费安装调试",
+  meta: [
+    {
+      name: "description",
+      content:
+        "易高整家定制，国内超大型专注于高端全屋定制家具加盟代理及其配套产品研发、生产及销售的全屋定制家具加盟代理十大品牌厂家。易高整家定制涵盖家装目录所有软装定制产品，为全屋定制家具加盟代理服务解决方案5A级供应商。",
+    },
+    {
+      name: "keywords",
+      content: "全屋定制|易高定制家具|整家定制|定制家具|定制家具十大品牌",
+    },
+  ],
+});
+</script>
 
 <style lang="less" scoped>
 .second-nav {

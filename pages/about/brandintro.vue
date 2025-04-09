@@ -131,6 +131,21 @@
 </template>
 
 <script lang="ts" setup>
+useHead({
+  title: "易高整家定制|易高定制家具|EGOL全屋定制品牌简介及企业使命",
+  meta: [
+    {
+      name: "description",
+      content:
+        "易高整家定制（EGOL）品牌介绍：易高整家定制坐落于中国科教基地-合肥，为国内超大型全品类全屋定制家具品牌，近50万㎡现代化物联网全屋定制家具生产基地，同时拥有3000平米新概念全屋定制家具品牌展示系统！易高整家定制品牌代言人：宋佳！",
+    },
+    {
+      name: "keywords",
+      content: "易高整家定制，全屋定制家具品牌，EGOL全屋定制",
+    },
+  ],
+});
+
 const containerRef = ref(null);
 const swiper = useSwiper(containerRef, {
   effect: "creative",

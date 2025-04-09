@@ -321,6 +321,7 @@ interface IProductsInfo {
   id: number;
   name: string;
   description: string;
+  keywords: string;
   colors: string;
   coverImage: string;
   displayImages: string[];
@@ -335,6 +336,20 @@ const { data: productInfo } = await useFetch<DataResponse<IProductsInfo>>(
     method: "get",
   }
 );
+
+useHead({
+  title: `${productInfo.value?.data.name}`,
+  meta: [
+    {
+      name: "description",
+      content: `${productInfo.value?.data.description}`,
+    },
+    {
+      name: "keywords",
+      content: `${productInfo.value?.data.keywords}`,
+    },
+  ],
+});
 
 const productSwiperRef = ref(null);
 const productSwiper = useSwiper(productSwiperRef, {

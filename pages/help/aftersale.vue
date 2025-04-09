@@ -2,26 +2,34 @@
   <div>
     <FreeHeader />
     <div class="second-nav">
-      <NuxtLink class="nav-item active" to="/free/design.html">
-        免费量尺设计
+      <NuxtLink class="nav-item" to="/help/process.html"> 定制流程 </NuxtLink>
+      <NuxtLink class="nav-item" to="/help/antifake.html"> 产品防伪 </NuxtLink>
+      <NuxtLink class="nav-item active" to="/help/aftersale.html">
+        产品售后
       </NuxtLink>
-      <NuxtLink class="nav-item" to="/free/delivery.html">
-        免费标准配送
-      </NuxtLink>
-      <NuxtLink class="nav-item" to="/free/assemble.html">
-        免费安装调试
+      <NuxtLink class="nav-item" to="/help/maintenance.html">
+        维修保养
       </NuxtLink>
     </div>
-    <div class="section design">
-      <h2>免费量尺设计</h2>
-      <p>坚持“量”心定制理念 并以此为品牌价值观</p>
+    <div class="section help">
+      <h2>产品售后</h2>
+      <p>七心服务，只为最佳用户体验</p>
       <i>&nbsp;</i>
-      <div>
+      <div class="content con1">
         <p>
-          量尺设计
+          七心服务
           <i>&nbsp;</i>
           <span>
-            易高整家定制为您提供三免服务，免费量尺设计：预约成功后，店面将与48小时内联系您，与您预约量尺时间，在量尺过程中，设计师会针对户型特点、生活习惯、居室成员、储物需求等情况与您沟通，您可把具体需求告知设计师，若您对效果图不满意，可提出相关建议，设计师将结合您的建议进行修改，使家具设计尽量符合您的预期。
+            易高整家定制独创“七心服务”，将售前售中售后全程服务纳入到服务规范内，不仅提供“十年质保升级为终身质保”的服务，还为老客户免费上门维护一次，以专业、完善、贴心的售后服务承诺，让您买的放心，用得安心。量”心定制，易高以此为品牌价值观，以实际行动，对品质的定义不断进行丰富、完善并与时俱进：品质不仅仅是质量。
+          </span>
+        </p>
+      </div>
+      <div class="content con2">
+        <p>
+          用户体验
+          <i>&nbsp;</i>
+          <span>
+            从一个消费者日常生活的问题的洞查开始，为解决问题而度身定做的产品方案，经过精心制造，以最适宜的方式送到消费者手中，其良好的品牌形象让消费者得到产品价值外的满足，而好用实用的产品功能让消费者得到最佳的使用体验和从始至终的优质服务。
           </span>
         </p>
       </div>
@@ -32,7 +40,7 @@
 
 <script lang="ts" setup>
 useHead({
-  title: "免费量尺设计",
+  title: "产品售后",
   meta: [
     {
       name: "description",
@@ -80,7 +88,7 @@ useHead({
   }
 }
 
-.design {
+.help {
   width: 1200px;
   margin: 0 auto;
   padding: 60px 0 110px;
@@ -107,8 +115,7 @@ useHead({
     margin: 0 auto;
   }
 
-  & > div {
-    background: #f7f7f7 url(/images/free_design_bg.jpg) top left no-repeat;
+  .content {
     height: 396px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -116,8 +123,6 @@ useHead({
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    justify-content: flex-end;
-    padding-right: 120px;
     margin-top: 16px;
 
     p {
@@ -142,6 +147,18 @@ useHead({
         font-weight: normal;
       }
     }
+  }
+
+  .con1 {
+    background: #f7f7f7 url(/images/help_aftersale_bg1.jpg) top left no-repeat;
+    justify-content: flex-end;
+    padding-right: 120px;
+  }
+
+  .con2 {
+    background: #f7f7f7 url(/images/help_aftersale_bg2.jpg) top right no-repeat;
+    justify-content: flex-start;
+    padding-left: 120px;
   }
 }
 </style>

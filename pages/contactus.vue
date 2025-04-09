@@ -66,7 +66,22 @@
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+useHead({
+  title: "易高整家定制(EGOL全屋定制)官方联系方式",
+  meta: [
+    {
+      name: "description",
+      content:
+        "易高整家定制联系方式：400-057-9889、在线QQ：779894377  总部地址：中国.合肥双凤开发区金淮路与凤麟路交口东北角易高家居大厦，生产基地：1、中国合肥双凤开发区，2、中国合肥双墩工业园。网址：www.yigaojiaju.com",
+    },
+    {
+      name: "keywords",
+      content: "易高整家定制，易高家居联系方式",
+    },
+  ],
+});
+</script>
 
 <style lang="less" scoped>
 .contactus {

@@ -121,6 +121,8 @@ const shopId = route.params.id;
 interface IShopInfo {
   id: number;
   name: string;
+  description: string;
+  keywords: string;
   summary: string;
   image: string;
 }
@@ -131,6 +133,20 @@ const { data: shopInfo } = await useFetch<DataResponse<IShopInfo>>(
     method: "get",
   }
 );
+
+useHead({
+  title: `${shopInfo.value?.data.name}`,
+  meta: [
+    {
+      name: "description",
+      content: `${shopInfo.value?.data.description}`,
+    },
+    {
+      name: "keywords",
+      content: `${shopInfo.value?.data.keywords}`,
+    },
+  ],
+});
 
 const captchaSVG = ref("");
 // const inputCode = ref("");

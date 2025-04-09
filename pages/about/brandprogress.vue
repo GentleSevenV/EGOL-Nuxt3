@@ -7,7 +7,7 @@
       <NuxtLink class="nav-item active" to="/about/brandprogress.html"
         >发展历程</NuxtLink
       >
-      <NuxtLink class="nav-item" to="/about/shops">专卖形象</NuxtLink>
+      <NuxtLink class="nav-item" to="/about/shops.html">专卖形象</NuxtLink>
     </div>
     <div class="container">
       <div class="page-title">
@@ -22,7 +22,22 @@
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+useHead({
+  title: "易高整家定制(EGOL全屋定制)企业发展历程",
+  meta: [
+    {
+      name: "description",
+      content:
+        "易高整家定制企业发展历程，主要包括易高定制家居在企业发展中的各个发展节点，包括品牌发源、品牌塑造、品牌发展阶段以及重大事宜。",
+    },
+    {
+      name: "keywords",
+      content: "易高整家定制(EGOL全屋定制)企业发展历程",
+    },
+  ],
+});
+</script>
 
 <style lang="less" scoped>
 .second-nav {

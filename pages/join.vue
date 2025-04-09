@@ -45,18 +45,20 @@
                 </ClientOnly>
               </el-form-item>
               <el-form-item prop="area">
-                <el-select
-                  v-model="formData.area"
-                  placeholder="请选择您的店铺面积"
-                  size="large"
-                  style="width: 290px"
-                  clearable
-                >
-                  <el-option label="100-200㎡" value="100-200㎡" />
-                  <el-option label="200-300㎡" value="200-300㎡" />
-                  <el-option label="300-500㎡" value="300-500㎡" />
-                  <el-option label="500㎡以上" value="500㎡以上" />
-                </el-select>
+                <ClientOnly>
+                  <el-select
+                    v-model="formData.area"
+                    placeholder="请选择您的店铺面积"
+                    size="large"
+                    style="width: 290px"
+                    clearable
+                  >
+                    <el-option label="100-200㎡" value="100-200㎡" />
+                    <el-option label="200-300㎡" value="200-300㎡" />
+                    <el-option label="300-500㎡" value="300-500㎡" />
+                    <el-option label="500㎡以上" value="500㎡以上" />
+                  </el-select>
+                </ClientOnly>
               </el-form-item>
             </div>
             <div>
@@ -349,7 +351,7 @@
               v-for="item in productsList"
               :key="item.id"
             >
-              <NuxtLink class="item-link" :to="`/products/${item.id}`">
+              <NuxtLink class="item-link" :to="`/products/${item.id}.html`">
                 <img :src="item.coverImage" />
                 <div>
                   <h3>{{ item.name }}</h3>
@@ -421,6 +423,22 @@
 </template>
 
 <script lang="ts" setup>
+useHead({
+  title: "易高整家定制|易高定制家居加盟代理—全屋定制十大品牌(EGOL)",
+  meta: [
+    {
+      name: "description",
+      content:
+        "易高整家定制（EGOL全屋定制）：易高全屋定制家具加盟代理品牌,国内超大型全屋定制家具品牌加盟/生产/运营商。中国超大型全品类全屋定制家具品牌厂家，集研发、设计、生产、销售、服务于一体专业全屋定制家具集团品牌。专属加盟代理热线：400-057-9889",
+    },
+    {
+      name: "keywords",
+      content:
+        "易高整家定制，全屋定制家具加盟代理，全屋定制家具品牌，全屋定制家具品牌，易高全屋定制家居加盟",
+    },
+  ],
+});
+
 import type { CascaderValue } from "element-plus";
 import { pcaTextArr, regionData, codeToText } from "element-china-area-data";
 import type { FormInstance, FormRules } from "element-plus";

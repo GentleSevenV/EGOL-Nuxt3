@@ -24,30 +24,27 @@
         <div class="service-item">
           <p>专属服务</p>
           <NuxtLink to="/free/design.html">免费量尺设计</NuxtLink>
-          <NuxtLink to="">免费标准配送</NuxtLink>
-          <NuxtLink to="">免费安装调试</NuxtLink>
+          <NuxtLink to="/free/delivery.html">免费标准配送</NuxtLink>
+          <NuxtLink to="/free/assemble.html">免费安装调试</NuxtLink>
         </div>
         <div class="service-item">
-          <p>定制帮助</p>
-          <NuxtLink to="">定制流程</NuxtLink>
-          <NuxtLink to="">防伪</NuxtLink>
-          <NuxtLink to="">售后</NuxtLink>
-          <NuxtLink to="">保养与维修</NuxtLink>
+          <p>产品帮助</p>
+          <NuxtLink to="/help/process.html">定制流程</NuxtLink>
+          <NuxtLink to="/help/antifake.html">产品防伪</NuxtLink>
+          <NuxtLink to="/help/aftersale.html">产品售后</NuxtLink>
+          <NuxtLink to="/help/maintenance.html">保养与维修</NuxtLink>
         </div>
         <div class="service-item">
-          <p>需要帮助</p>
-          <NuxtLink to="">联系我们</NuxtLink>
-          <NuxtLink to="">常见问题</NuxtLink>
-          <NuxtLink to="">站点地图</NuxtLink>
-          <NuxtLink to="">TAG地图</NuxtLink>
+          <p>实力秀</p>
+          <NuxtLink to="/powershow/equipments.html">设备展示</NuxtLink>
+          <NuxtLink to="/powershow/staff.html">员工风采</NuxtLink>
+          <NuxtLink to="/powershow/environment.html">公司环境</NuxtLink>
         </div>
         <div class="service-item">
-          <p>关于公司</p>
-          <NuxtLink to="">企业责任</NuxtLink>
-          <NuxtLink to="">职业发展</NuxtLink>
-          <NuxtLink to="">细则及条款</NuxtLink>
-          <NuxtLink to="">隐私与 COOKIE</NuxtLink>
-          <NuxtLink to="">实力秀</NuxtLink>
+          <p>政策条款</p>
+          <NuxtLink to="/others/qa.html">Q&A</NuxtLink>
+          <NuxtLink to="/others/privacy.html">隐私与COOKIE</NuxtLink>
+          <NuxtLink to="/others/legal.html">法律声明</NuxtLink>
         </div>
       </div>
     </div>

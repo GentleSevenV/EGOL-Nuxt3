@@ -48,6 +48,22 @@
 </template>
 
 <script lang="ts" setup>
+useHead({
+  title:
+    "易高整家定制(EGOL全屋定制)荣誉：衣柜十大品牌，衣柜十环认证，2024全屋定制消费者喜爱十大品牌",
+  meta: [
+    {
+      name: "description",
+      content:
+        "易高整家定制先后在2012-2025年间，获得中国衣柜十大匹配，衣柜十环认证，2024全屋定制消费者喜爱十大品牌等诸多荣誉，奠定了易高整家定制在业内的领导者地位。",
+    },
+    {
+      name: "keywords",
+      content: "易高整家定制,衣柜十大品牌，衣柜十环认证，衣柜品牌联盟主席单位",
+    },
+  ],
+});
+
 interface IHonor {
   id: number;
   name: string;

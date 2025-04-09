@@ -5,7 +5,7 @@
     <i>&nbsp;</i>
     <div class="products-list">
       <template v-for="item in productsLatests" :key="item.id">
-        <NuxtLink class="item" :to="`/products/${item.id}`">
+        <NuxtLink class="item" :to="`/products/${item.id}.html`">
           <h3>{{ item.name }}</h3>
           <i></i>
           <img :src="item.coverImage" />

@@ -2,26 +2,32 @@
   <div>
     <FreeHeader />
     <div class="second-nav">
-      <NuxtLink class="nav-item active" to="/free/design.html">
-        免费量尺设计
-      </NuxtLink>
-      <NuxtLink class="nav-item" to="/free/delivery.html">
-        免费标准配送
-      </NuxtLink>
-      <NuxtLink class="nav-item" to="/free/assemble.html">
-        免费安装调试
+      <NuxtLink class="nav-item" to="/help/process.html"> 定制流程 </NuxtLink>
+      <NuxtLink class="nav-item" to="/help/antifake.html"> 产品防伪 </NuxtLink>
+      <NuxtLink class="nav-item" to="/help/aftersale.html"> 产品售后 </NuxtLink>
+      <NuxtLink class="nav-item active" to="/help/maintenance.html">
+        维修保养
       </NuxtLink>
     </div>
-    <div class="section design">
-      <h2>免费量尺设计</h2>
-      <p>坚持“量”心定制理念 并以此为品牌价值观</p>
+    <div class="section help">
+      <h2>保养与维修</h2>
+      <p>时用时新，除了产品还有更多优质服务</p>
       <i>&nbsp;</i>
-      <div>
+      <div class="content con1">
         <p>
-          量尺设计
+          清洁保养
           <i>&nbsp;</i>
           <span>
-            易高整家定制为您提供三免服务，免费量尺设计：预约成功后，店面将与48小时内联系您，与您预约量尺时间，在量尺过程中，设计师会针对户型特点、生活习惯、居室成员、储物需求等情况与您沟通，您可把具体需求告知设计师，若您对效果图不满意，可提出相关建议，设计师将结合您的建议进行修改，使家具设计尽量符合您的预期。
+            板材表面为三聚氰胺饰面，如有污渍，请采用清洁液擦拭。再用湿热毛巾擦一遍，最后用干毛巾擦拭。严禁用钢丝球等利器擦拭，封边处严禁水泡，以防起鼓。同时选用腐蚀性小的清洁液清洁产品表面。为保证衣柜移门的清洁，轨道内如有杂物，尘土请用毛刷清理。严防重物及锐器砸碰轨道，以防轨道内部发生破损，影响滑动效果。
+          </span>
+        </p>
+      </div>
+      <div class="content con2">
+        <p>
+          质保十年，终身维护
+          <i>&nbsp;</i>
+          <span>
+            自购货日起，易高整家定制将为您所购产品提供保修期内的保修服务。当您发现产品有任何质量问题，请您联系当地经销商。您还可以通过拨打易高服务热线400-0579-889、关注“易高家居”官方微信等多渠道与我们直接联系。任何机构和人员（如经销商）在本服务承诺之外就您购买的产品向您做出的任何额外承诺，易高整家定制不承担任何责任。
           </span>
         </p>
       </div>
@@ -32,7 +38,7 @@
 
 <script lang="ts" setup>
 useHead({
-  title: "免费量尺设计",
+  title: "保养与维修",
   meta: [
     {
       name: "description",
@@ -80,7 +86,7 @@ useHead({
   }
 }
 
-.design {
+.help {
   width: 1200px;
   margin: 0 auto;
   padding: 60px 0 110px;
@@ -107,8 +113,7 @@ useHead({
     margin: 0 auto;
   }
 
-  & > div {
-    background: #f7f7f7 url(/images/free_design_bg.jpg) top left no-repeat;
+  .content {
     height: 396px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -116,8 +121,6 @@ useHead({
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    justify-content: flex-end;
-    padding-right: 120px;
     margin-top: 16px;
 
     p {
@@ -142,6 +145,19 @@ useHead({
         font-weight: normal;
       }
     }
+  }
+
+  .con1 {
+    background: #f7f7f7 url(/images/help_maintenance_bg1.jpg) top left no-repeat;
+    justify-content: flex-end;
+    padding-right: 120px;
+  }
+
+  .con2 {
+    background: #f7f7f7 url(/images/help_maintenance_bg2.jpg) top right
+      no-repeat;
+    justify-content: flex-start;
+    padding-left: 120px;
   }
 }
 </style>

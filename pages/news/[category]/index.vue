@@ -28,6 +28,20 @@
 </template>
 
 <script lang="ts" setup>
+useHead({
+  title: "易高整家定制新闻动态、团购、开业及活动-EGOL全屋定制资讯频道",
+  meta: [
+    {
+      name: "description",
+      content:
+        "易高整家定制（EGOL全屋定制）资讯频道-第一时间更新易高定制家居团购活动、最新产品发布、专卖店开业资讯、相关媒体对易高定制家居公司报道以及公司内部相关活动！",
+    },
+    {
+      name: "keywords",
+      content: "易高定制家居新闻、EGOL全屋定制活动",
+    },
+  ],
+});
 import type { TabsPaneContext } from "element-plus";
 const route = useRoute();
 const router = useRouter();
