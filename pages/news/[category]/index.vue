@@ -10,18 +10,9 @@
       <template v-for="item in newsTabs" :key="item.id">
         <el-tab-pane :label="item.label" :name="item.name"> </el-tab-pane>
       </template>
-      <!-- <el-tab-pane label="品牌资讯" name="brandnews">
-        <NewsList></NewsList>
-      </el-tab-pane>
-      <el-tab-pane label="行业资讯" name="industrynews">
-        <NewsList></NewsList>
-      </el-tab-pane>
-      <el-tab-pane label="精彩活动" name="activitynews">
-        <NewsList></NewsList>
-      </el-tab-pane> -->
     </el-tabs>
     <div class="news-con">
-      <NewsList :activeName="activeName"></NewsList>
+      <NewsList></NewsList>
       <NewsLatest />
     </div>
   </div>
@@ -52,21 +43,17 @@ const newsTabs = reactive([
   { id: 3, label: "精彩活动", name: "activitynews" },
 ]);
 
-// 根据路由中的category参数进行数据请求
+// 1.根据路由中的category参数赋值给el-tabs的activeName属性，绑定选项卡的name，以便知道当前切换在哪个新闻分类下
 const category = route.params.category;
 const activeName = ref<string | number>(
   Array.isArray(category) ? category[0] : category
 );
 
-// 通过useState获取主导航中定义的全局状态
-// const activeNav = useState("menu");
-
+// 2.el-tabs点击事件：获取当前点击tab的对象，修改绑定的activeName值，并且修改地址栏路径
 const handleClick = (tab: TabsPaneContext) => {
-  if (tab.paneName) {
-    activeName.value = tab.paneName;
-    // 当点击此页面中的二级导航的同时也要进行对主导航状态的修改，以达到联动效果
-    // activeNav.value = `/news/${tab.paneName}`;
-    router.push(`/news/${tab.paneName}.html`);
+  if (tab.props.name) {
+    activeName.value = tab.props.name;
+    router.push(`/news/${tab.props.name}.html`);
   }
 };
 </script>

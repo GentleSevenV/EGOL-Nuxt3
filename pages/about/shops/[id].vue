@@ -8,7 +8,7 @@
         >发展历程</NuxtLink
       >
       <NuxtLink class="nav-item active" to="/about/shops.html"
-        >专卖形象</NuxtLink
+        >门店形象</NuxtLink
       >
     </div>
     <div class="shop-con">

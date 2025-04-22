@@ -39,9 +39,9 @@
         </div>
       </div>
 
-      <div v-if="productsList?.length != 0">
+      <div v-if="productsList?.data.list.length != 0">
         <div class="products-list">
-          <template v-for="item in productsList" :key="item.id">
+          <template v-for="item in productsList?.data.list" :key="item.id">
             <NuxtLink class="item" :to="`/products/${item.id}.html`">
               <h3>{{ item.name }}</h3>
               <i></i>
@@ -60,12 +60,16 @@
         <div class="pagination">
           <ClientOnly fallback-tag="span" fallback="分页加载中...">
             <el-pagination
-              v-model:current-page="filterData.page"
-              v-model:page-size="filterData.size"
+              v-model:current-page="currentPage"
+              v-model:page-size="pageSize"
               :page-sizes="[3, 6, 9]"
               background
               layout="total, sizes, prev, pager, next, jumper"
-              :total="total"
+              :total="
+                productsList?.data.pagination
+                  ? productsList?.data.pagination.total
+                  : 0
+              "
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
             />
@@ -104,31 +108,22 @@ interface IProductsList {
   includes: string;
 }
 
+// 1.初始化筛选列表选中状态
 const category = ref<string | number | boolean | undefined>(0);
 const style = ref<string | number | boolean | undefined>(0);
 const space = ref<string | number | boolean | undefined>(0);
 
-interface Ifilter {
-  category?: string | number | boolean | null;
-  style?: string | number | boolean | null;
-  space?: string | number | boolean | null;
-  page: number;
-  size: number;
-  status: number;
-}
-const filterData = reactive<Ifilter>({
-  category: null,
-  style: null,
-  space: null,
-  page: 1, // 页面是从1开始的,设置默认值为1
-  size: 9,
-  status: 1,
-});
+// 2.初始化默认产品列表请求参数
+const categoryRef = ref<string | number | boolean | undefined | null>(null);
+const styleRef = ref<string | number | boolean | undefined | null>(null);
+const spaceRef = ref<string | number | boolean | undefined | null>(null);
 
-const total = ref<number | undefined>(0);
-const productsList = ref<IProductsList[] | undefined>([]);
+// 3.获取当前路由中的currentPage参数，用于发送网络请求获取当前页面的news数据
+const route = useRoute();
+const currentPage = ref(route.query.page ? Number(route.query.page) : 1);
+const pageSize = ref(9);
 
-// 获取筛选器中各分类的数据
+// 4.获取筛选器中各分类的数据
 const { data: filterDict } = await useFetch<DataResponsePageDict<IDict[]>>(
   "/open/dict/info/data",
   {
@@ -137,84 +132,77 @@ const { data: filterDict } = await useFetch<DataResponsePageDict<IDict[]>>(
   }
 );
 
-// 获取默认产品列表数据时，请求参数不能使用filterData响应式数据，否则在点击不同的radio时会重复发送网络请求
-const { data } = await useFetch<DataResponsePage<IProductsList[]>>(
-  "/open/products/info/page",
-  {
-    method: "post",
-    body: { page: 1, size: 9, status: 1 },
-  }
-);
+// 5.获取默认产品列表数据
+const { data: productsList } = await useFetch<
+  DataResponsePage<IProductsList[]>
+>("/open/products/info/page", {
+  method: "post",
+  body: {
+    category: categoryRef,
+    style: styleRef,
+    space: spaceRef,
+    page: currentPage,
+    size: pageSize,
+    status: 1,
+  },
+});
 
-productsList.value = data.value?.data.list;
-total.value = data.value?.data.pagination.total;
-
-const filterProduct = async (filterData: Ifilter) => {
-  const data = await $fetch<DataResponsePage<IProductsList[]>>(
-    "/open/products/info/page",
-    {
-      method: "post",
-      body: filterData,
-    }
-  );
-  // console.log(data);
-  return data.data;
-};
-
+// 6.分类筛选逻辑：修改分类请求参数，自动触发useFetch网络请求，加载分类产品数据
 const categoryChange = async (val: string | number | boolean | undefined) => {
-  // console.log("打印第一次！");
   if (val === 0) {
-    filterData.category = null;
+    categoryRef.value = null;
   } else {
-    filterData.category = val;
+    categoryRef.value = val;
   }
-
-  filterProduct(filterData).then((res) => {
-    productsList.value = res.list;
-    total.value = res.pagination.total;
-  });
 };
 
+// 7.风格筛选逻辑：修改风格请求参数，自动触发useFetch网络请求，加载风格产品数据
 const styleChange = (val: string | number | boolean | undefined) => {
   if (val === 0) {
-    filterData.style = null;
+    styleRef.value = null;
   } else {
-    filterData.style = val;
+    styleRef.value = val;
   }
-
-  filterProduct(filterData).then((res) => {
-    productsList.value = res.list;
-    total.value = res.pagination.total;
-  });
 };
 
+// 8.空间筛选逻辑：修改空间请求参数，自动触发useFetch网络请求，加载空间产品数据
 const spaceChange = (val: string | number | boolean | undefined) => {
   if (val === 0) {
-    filterData.space = null;
+    spaceRef.value = null;
   } else {
-    filterData.space = val;
+    spaceRef.value = val;
   }
-
-  filterProduct(filterData).then((res) => {
-    productsList.value = res.list;
-    total.value = res.pagination.total;
-  });
 };
 
+// 9.产品展示数量逻辑：修改产品展示数量请求参数，自动触发useFetch网络请求，加载产品数据
 const handleSizeChange = (val: number) => {
-  filterData.size = val;
-  filterProduct(filterData).then((res) => {
-    productsList.value = res.list;
-    total.value = res.pagination.total;
-  });
+  pageSize.value = val;
 };
-const handleCurrentChange = (val: number) => {
-  filterData.page = val;
-  filterProduct(filterData).then((res) => {
-    productsList.value = res.list;
-    total.value = res.pagination.total;
+
+// 10.分页逻辑：修改分页请求参数，自动触发useFetch网络请求，加载产品数据
+const handleCurrentChange = async (val: number) => {
+  await navigateTo({
+    path: `/products.html`,
+    query: {
+      page: val,
+    },
   });
+  if (import.meta.client) {
+    window.scrollTo(0, 700);
+  }
 };
+
+// 11.当我们点击浏览器上的后退按钮时，如果我们也想展示后退之后页面的数据时，我们只能通过watch去监听浏览器地址栏中的page参数(也就是route.query.page这个值)，当page参数发生变化，watch会监听到2个值，一个是新的route.query.page值，一个是旧的route.query.page值，那么我们需要将新的page参数值赋值给currentPage.value，那么此时currentPage这个响应式对象发生了改变，那么也就会自动触发上面的useFetch网络请求来获取后退之后这一页的最新数据；
+watch(
+  () => route.query.page,
+  (newVal, oldVal) => {
+    if (Number(newVal) > 1) {
+      currentPage.value = Number(newVal);
+    } else {
+      currentPage.value = 1;
+    }
+  }
+);
 </script>
 <style lang="less" scoped>
 .products {

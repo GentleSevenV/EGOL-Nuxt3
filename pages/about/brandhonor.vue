@@ -9,7 +9,7 @@
       <NuxtLink class="nav-item" to="/about/brandprogress.html"
         >发展历程</NuxtLink
       >
-      <NuxtLink class="nav-item" to="/about/shops.html">专卖形象</NuxtLink>
+      <NuxtLink class="nav-item" to="/about/shops.html">门店形象</NuxtLink>
     </div>
     <div class="container">
       <div class="page-title">
@@ -19,7 +19,7 @@
       </div>
 
       <div class="honor-list">
-        <template v-for="item in honorsList" :key="item.id">
+        <template v-for="item in honorsList?.data.list" :key="item.id">
           <div>
             <img :src="item.image" />
             <p>
@@ -32,12 +32,12 @@
       <div class="pagination">
         <ClientOnly fallback-tag="span" fallback="分页加载中...">
           <el-pagination
-            v-model:current-page="pageData.page"
-            v-model:page-size="pageData.size"
+            v-model:current-page="currentPage"
+            v-model:page-size="pageSize"
             :page-sizes="[3, 6, 9]"
             background
             layout="total, sizes, prev, pager, next, jumper"
-            :total="total"
+            :total="totalHonors"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
           />
@@ -50,7 +50,7 @@
 <script lang="ts" setup>
 useHead({
   title:
-    "易高整家定制(EGOL全屋定制)荣誉：衣柜十大品牌，衣柜十环认证，2024全屋定制消费者喜爱十大品牌1",
+    "易高整家定制(EGOL全屋定制)荣誉：衣柜十大品牌，衣柜十环认证，2024全屋定制消费者喜爱十大品牌",
   meta: [
     {
       name: "description",
@@ -71,63 +71,62 @@ interface IHonor {
   issueDate: string;
 }
 
-const honorsList = ref<IHonor[] | undefined>([]);
-const total = ref<number | undefined>(0);
+// 1.获取当前路由中的currentPage参数，用于发送网络请求获取当前页面的news数据
+const route = useRoute();
+const currentPage = ref(route.query.page ? Number(route.query.page) : 1);
+const pageSize = ref(9);
+const totalHonors = ref(0);
 
-// 设置默认分页请求参数
-interface IPage {
-  page: number;
-  size: number;
-  status: number;
-}
-const pageData = reactive<IPage>({
-  page: 1, // 页面是从1开始的,设置默认值为1
-  size: 9,
-  status: 1,
-});
-
-// 获取默认列表数据
-const { data } = await useFetch<DataResponsePage<IHonor[]>>(
+// // 2.根据currentPage值来获取对应分类的news数据，并且监听currentPage这个ref对象(注意：currentPage是响应式对象数据，而currenPage.value仅仅是一个不具有响应式的正常的数据值，此处的page一定要绑定currentPage这个ref对象，而不是currentPage.value，因为nuxt3中的useFetch这个api，当携带的参数中包含响应式对象时，那么它内部会自动监听这个响应对象，如果这个响应式对象内部的值发生改变时，会自动重新发起请求，来获取最新的数据)，pageSize同理；
+// 2.1 那么当我们点击el-pagination这个分页组件进行切换分页时，下面的 handleCurrentChange函数中会修改currentPage.value的值，那么currentPage这个响应式对象发生了改变，那么就会自动触发这个网络请求来获取最新一页的数据；
+// 2.2 而且当我们点击浏览器上的后退按钮时，浏览器地址栏中的page参数发生变化，由于下面我们使用了watch监听了路由中的page参数(也就是route.query.page)，当page参数发生变化时，我们将最新的page参数值再赋值给currentPage.value，那么此时currentPage这个响应式对象发生了改变，那么也会自动触发这个网络请求来获取当前页的数据；
+const { data: honorsList } = await useFetch<DataResponsePage<IHonor[]>>(
   "/open/honor/info/page",
   {
     method: "post",
-    body: pageData,
+    body: {
+      page: currentPage,
+      size: pageSize,
+      status: 1,
+    },
   }
 );
 
-if (data.value == null) {
-  console.log("荣誉为空！");
+if (honorsList.value == null) {
+  console.log("未查询到荣誉！");
 } else {
-  honorsList.value = data.value.data.list;
-  total.value = data.value.data.pagination.total;
+  totalHonors.value = honorsList.value.data.pagination.total;
 }
 
-const getHonorsList = async (newPageData: IPage) => {
-  const data = await $fetch<DataResponsePage<IHonor[]>>(
-    "/open/honor/info/page",
-    {
-      method: "post",
-      body: newPageData,
-    }
-  );
-  // console.log(data);
-  return data.data;
+// 3.当我们点击el-pagination这个分页组件进行切换展示条目数量pageSize时，我们只需要将最新的pageSize值赋值给pageSize.value，那么pageSize这个响应式对象发生了改变，而useFetch会监听pageSize这个响应式对象，那么就会自动触发上面的useFetch网络请求来获取最新的数据和展示最新的条目数量；
+const handleSizeChange = (val: number) => {
+  pageSize.value = val;
 };
 
-const handleSizeChange = (val: number) => {
-  pageData.size = val;
-  getHonorsList(pageData).then((res) => {
-    honorsList.value = res.list;
-    total.value = res.pagination.total;
+// 4.当我们点击el-pagination这个分页组件进行切换分页时，使用navigationTo导航到当前分类页下并修改page参数，而currentPage会通过route.query.page获取到最新的值，那么currentPage这个响应式对象发生了改变，而useFetch会监听currentPage这个响应式对象，那么就会自动触发上面的useFetch网络请求来获取最新一页的数据；
+const handleCurrentChange = async (val: number) => {
+  await navigateTo({
+    path: `/about/brandhonor.html`,
+    query: {
+      page: val,
+    },
   });
+  if (import.meta.client) {
+    window.scrollTo(0, 0);
+  }
 };
-const handleCurrentChange = (val: number) => {
-  pageData.page = val;
-  getHonorsList(pageData).then((res) => {
-    honorsList.value = res.list;
-    total.value = res.pagination.total;
-  });
-};
+
+// 5.当我们点击浏览器上的后退按钮时，如果我们也想展示后退之后页面的数据时，我们只能通过watch去监听浏览器地址栏中的page参数(也就是route.query.page这个值)，当page参数发生变化，watch会监听到2个值，一个是新的route.query.page值，一个是旧的route.query.page值，那么我们需要将新的page参数值赋值给currentPage.value，那么此时currentPage这个响应式对象发生了改变，那么也就会自动触发上面的useFetch网络请求来获取后退之后这一页的最新数据；
+watch(
+  () => route.query.page,
+  (newVal, oldVal) => {
+    if (Number(newVal) > 1) {
+      currentPage.value = Number(newVal);
+    } else {
+      currentPage.value = 1;
+    }
+  }
+);
 </script>
 
 <style lang="less" scoped>

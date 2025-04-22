@@ -69,11 +69,14 @@ watch(
     let newpath;
     if (route.params.category && route.params.id) {
       // 3.拼接成新的路径
-      newpath = "/" + newValue.slice(0, 2).join("/");
+      newpath = "/" + newValue.slice(0, 2).join("/") + ".html";
+      activeIndex.value = newpath;
+    } else if (route.params.id && newValue[1] == "shops") {
+      newpath = "/" + newValue.slice(0, 2).join("/") + ".html";
       activeIndex.value = newpath;
     } else if (route.params.id) {
       // 4.如果没有category参数的路由，只需要判断是否存在id参数即可，并且newpath取值需要减少一位
-      newpath = "/" + newValue.slice(0, 1);
+      newpath = "/" + newValue.slice(0, 1) + ".html";
       activeIndex.value = newpath;
     } else {
       activeIndex.value = value;

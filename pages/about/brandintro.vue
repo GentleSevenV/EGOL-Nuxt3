@@ -9,7 +9,7 @@
       <NuxtLink class="nav-item" to="/about/brandprogress.html"
         >发展历程</NuxtLink
       >
-      <NuxtLink class="nav-item" to="/about/shops.html">专卖形象</NuxtLink>
+      <NuxtLink class="nav-item" to="/about/shops.html">门店形象</NuxtLink>
     </div>
     <div class="section intro">
       <div class="factory">
