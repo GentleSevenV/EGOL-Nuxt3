@@ -177,7 +177,14 @@ const rules = reactive({
     { required: true, message: "请输入正确的名称", trigger: "blur" },
     { min: 2, max: 5, message: "名称的长度为2~5个字符", trigger: "blur" },
   ],
-  phone: [{ required: true, message: "请输入正确的手机号码", trigger: "blur" }],
+  phone: [
+    { required: true, message: "请输入正确的手机号码", trigger: "blur" },
+    {
+      pattern: /^1[3-9]\d{9}$/,
+      message: "请输入有效的手机号码",
+      trigger: "blur",
+    },
+  ],
   code: [{ validator: checkCode, trigger: "blur" }],
 });
 
@@ -222,6 +229,13 @@ const onSubmit = (formEl: FormInstance | undefined) => {
             });
 
             formEl.resetFields();
+          } else {
+            ElMessage({
+              message: res.message,
+              type: "error",
+              showClose: true,
+              duration: 0,
+            });
           }
         })
         .catch((err) => {

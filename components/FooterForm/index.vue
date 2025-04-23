@@ -1,9 +1,20 @@
 <template>
   <div>
-    <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" class="wxForm" status-icon>
-      <el-form-item class="form-con" prop="wxaccount">
-        <el-input v-model="ruleForm.wxaccount" placeholder="请输入您微信绑定的手机号码" />
-        <el-button type="primary" @click="submitForm(ruleFormRef)"> 提交 </el-button>
+    <el-form
+      ref="ruleFormRef"
+      :model="ruleForm"
+      :rules="rules"
+      class="wxForm"
+      status-icon
+    >
+      <el-form-item class="form-con" prop="phone">
+        <el-input
+          v-model="ruleForm.phone"
+          placeholder="请输入您微信绑定的手机号码"
+        />
+        <el-button type="primary" @click="submitForm(ruleFormRef)">
+          提交
+        </el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -13,21 +24,20 @@
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
 
 interface RuleForm {
-  wxaccount: string;
+  phone: string;
 }
 
 const ruleFormRef = ref<FormInstance>();
 
 const ruleForm = reactive<RuleForm>({
-  wxaccount: "",
+  phone: "",
 });
 
 const rules = reactive<FormRules<RuleForm>>({
-  wxaccount: [
+  phone: [
     { required: true, message: "请输入您微信绑定的手机号码", trigger: "blur" },
     {
-      required: true,
-      pattern: /^1(3[0-9]|4[01456879]|5[0-35-9]|6[2567]|7[0-8]|8[0-9]|9[0-35-9])\d{8}$/,
+      pattern: /^1[3-9]\d{9}$/,
       message: "请输入正确的11位手机号码",
       trigger: "blur",
     },
@@ -38,9 +48,46 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   await formEl.validate((valid, fields) => {
     if (valid) {
-      console.log("submit!");
+      $fetch<DataResponse<IMessage>>(`/open/messages/wxaccount/add`, {
+        method: "post",
+        body: {
+          phone: ruleForm.phone,
+        },
+      })
+        .then((res) => {
+          if (res.code == 1000) {
+            ElMessage({
+              message:
+                "您的信息已成功提交, 24小时内会有工作人员和您联系，请保持手机畅通。",
+              type: "success",
+              showClose: true,
+              duration: 0,
+            });
+
+            formEl.resetFields();
+          } else {
+            ElMessage({
+              message: res.message,
+              type: "error",
+              showClose: true,
+              duration: 0,
+            });
+          }
+        })
+        .catch((err) => {
+          ElMessage({
+            message: "请按照页面提示填写相关信息。",
+            type: "error",
+            showClose: true,
+            duration: 0,
+          });
+        });
     } else {
-      console.log("error submit!", fields);
+      // console.log("error submit!", fields);
+      ElMessage({
+        message: "表单验证未通过，请按照页面提示填写相关信息。",
+        type: "error",
+      });
     }
   });
 };

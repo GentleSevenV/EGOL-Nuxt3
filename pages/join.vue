@@ -486,7 +486,14 @@ const rules = reactive({
     { required: true, message: "请输入正确的名称", trigger: "blur" },
     { min: 2, max: 5, message: "名称的长度为2~5个字符", trigger: "blur" },
   ],
-  phone: [{ required: true, message: "请输入正确的手机号码", trigger: "blur" }],
+  phone: [
+    { required: true, message: "请输入手机号码", trigger: "blur" },
+    {
+      pattern: /^1[3-9]\d{9}$/,
+      message: "请输入有效的手机号码",
+      trigger: "blur",
+    },
+  ],
   region: [
     { required: true, message: "请选择您所在的地区", trigger: "change" },
   ],
@@ -498,7 +505,7 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   await formEl.validate((valid, fields) => {
     if (valid) {
-      console.log("验证通过!", formData);
+      // console.log("验证通过!", formData);
       $fetch<DataResponse<IMessage>>(`/open/messages/join/add`, {
         method: "post",
         body: {
@@ -521,6 +528,13 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
             });
 
             formEl.resetFields();
+          } else {
+            ElMessage({
+              message: res.message,
+              type: "error",
+              showClose: true,
+              duration: 0,
+            });
           }
         })
         .catch((err) => {
