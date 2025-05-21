@@ -389,10 +389,9 @@
           <img src="/images/join_yx6.jpg" />
           <img src="/images/join_yx7.jpg" />
         </div>
-
-        <div>
+        <!-- <div>
           <img src="/images/join_yx8.jpg" style="width: 100%" />
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="dz-ad">

@@ -32,33 +32,43 @@
       <div class="section products">
         <div class="layout">
           <h1>产品展示</h1>
-          <div>
-            <ClientOnly>
-              <swiper-container ref="containerRef" :init="false">
-                <swiper-slide
-                  class="rec-product"
-                  v-for="item in recProducts?.data"
-                  :key="item.id"
-                >
-                  <div class="product-infos">
-                    <h3>{{ item.name }}</h3>
-                    <p>{{ item.description }}</p>
-                    <template
-                      v-for="(label, index) in item.labels"
-                      :key="index"
-                    >
-                      <span>{{ label }}</span>
-                    </template>
-                    <div class="probtn">
-                      <NuxtLink class="more" :to="`/products/${item.id}.html`"
-                        >了解更多</NuxtLink
+          <div class="swiper-con">
+            <!-- Go back one slide -->
+            <div class="swiper-button swiper-button-prev">
+              <ArrowLeft class="icon" />
+            </div>
+            <div>
+              <ClientOnly>
+                <swiper-container ref="containerRef" :init="false">
+                  <swiper-slide
+                    class="rec-product"
+                    v-for="item in recProducts?.data"
+                    :key="item.id"
+                  >
+                    <div class="product-infos">
+                      <h3>{{ item.name }}</h3>
+                      <p>{{ item.description }}</p>
+                      <template
+                        v-for="(label, index) in item.labels"
+                        :key="index"
                       >
+                        <span>{{ label }}</span>
+                      </template>
+                      <div class="probtn">
+                        <NuxtLink class="more" :to="`/products/${item.id}.html`"
+                          >了解更多</NuxtLink
+                        >
+                      </div>
                     </div>
-                  </div>
-                  <img class="product-img" :src="item.coverImage" />
-                </swiper-slide>
-              </swiper-container>
-            </ClientOnly>
+                    <img class="product-img" :src="item.coverImage" />
+                  </swiper-slide>
+                </swiper-container>
+              </ClientOnly>
+            </div>
+            <!-- Go forward one slide -->
+            <div class="swiper-button swiper-button-next">
+              <ArrowRight class="icon" />
+            </div>
           </div>
         </div>
       </div>
@@ -209,6 +219,8 @@ useHead({
   ],
 });
 
+import { ArrowLeft, ArrowRight } from "@element-plus/icons-vue";
+
 interface IBannerType {
   id: number;
   title: string;
@@ -253,6 +265,10 @@ const swiper = useSwiper(containerRef, {
   speed: 1600,
   autoplay: {
     delay: 4000,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
   },
 });
 
@@ -320,6 +336,42 @@ const [{ data: brandnews }, { data: indstynews }, { data: activitynews }] =
         padding-bottom: 15px;
         letter-spacing: 2px;
         margin-bottom: 60px;
+      }
+
+      .swiper-con {
+        position: relative;
+
+        .swiper-button {
+          position: absolute;
+          top: 50%;
+          width: 40px;
+          cursor: pointer;
+          height: 40px;
+          border-radius: 20px;
+          border: 1px solid #838383;
+          padding: 8px;
+          margin-top: -20px;
+
+          .icon {
+            color: #838383;
+          }
+
+          &:hover {
+            border: 1px solid #fff;
+
+            .icon {
+              color: #fff;
+            }
+          }
+        }
+
+        .swiper-button-prev {
+          left: -90px;
+        }
+
+        .swiper-button-next {
+          right: -90px;
+        }
       }
     }
   }
