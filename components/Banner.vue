@@ -15,13 +15,10 @@ interface IBannerType {
   link: string;
   pcImage: string;
 }
-const props = defineProps({
-  banners: {
-    type: Array<IBannerType>,
-    required: true,
-    default: null,
-  },
-});
+const props = withDefaults(
+  defineProps<{ banners?: IBannerType[] }>(),
+  { banners: () => [] }
+);
 
 const containerRef = ref(null);
 const swiper = useSwiper(containerRef, {
