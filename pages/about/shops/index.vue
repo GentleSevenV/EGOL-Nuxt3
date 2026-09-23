@@ -90,7 +90,7 @@ const { data: shopsList } = await useFetch<DataResponsePage<IShops[]>>(
       size: pageSize,
       status: 1,
     },
-  }
+  },
 );
 
 if (shopsList.value == null) {
@@ -127,7 +127,7 @@ watch(
     } else {
       currentPage.value = 1;
     }
-  }
+  },
 );
 </script>
 

@@ -85,7 +85,8 @@
     </div>
     <FriendlyLink class="link-con" :class="{ show: isShow }"></FriendlyLink>
     <div class="icpinfo">
-      易高家居有限公司 版权所有COPYRIGHT&nbsp;&nbsp;&nbsp;&nbsp;
+      易高家居有限公司 版权所有COPYRIGHT ©
+      {{ new Date().getFullYear() }}&nbsp;&nbsp;&nbsp;&nbsp;
       <a
         style="color: #727272"
         target="_blank"

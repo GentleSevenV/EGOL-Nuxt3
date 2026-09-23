@@ -81,8 +81,8 @@
       </div>
     </div>
     <div class="section">
-      <h2>32项品牌荣誉，全屋定制行业规则制定者之一</h2>
-      <p>中国超大型全品类全屋定制家具品牌厂家</p>
+      <h2>多项品牌荣誉</h2>
+      <p>一站式整家定制企业</p>
       <i>&nbsp;</i>
       <div class="honors-list">
         <div>
@@ -340,7 +340,7 @@
       </div>
     </div>
     <div class="section swiper-products">
-      <h2>全屋定制领域全品类厂商，赋予产品强大竞争力</h2>
+      <h2>一站式整家定制企业，赋予产品强大竞争力</h2>
       <p>以 | 量“心”定制 | 为信念追求，坚持6S管理法则</p>
       <i>&nbsp;</i>
       <div class="swiper">
@@ -402,7 +402,7 @@
         </div>
         <div>
           <p>1.有建材或家具行业相关经营管理经验</p>
-          <p>2.专卖店面积不低于100平米</p>
+          <p>2.专卖店面积不低于80m²</p>
           <p>
             3.专卖店位置为所在区域的主要建材家具集散地，如红星、居然、建材市场等
           </p>
@@ -569,7 +569,7 @@ const { data } = await useFetch<DataResponsePage<IProductsList[]>>(
   {
     method: "post",
     body: { page: 1, size: 6, status: 1 },
-  }
+  },
 );
 
 productsList.value = data.value?.data.list;

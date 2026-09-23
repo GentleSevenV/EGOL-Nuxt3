@@ -4,7 +4,11 @@
       <div class="top">
         <div class="title">
           <h2>公司概况</h2>
-          <p>截至2025年1月1日<span>易高整家定制概况</span></p>
+          <p>
+            截至 {{ new Date().getFullYear() }}年1月1日<span
+              >易高整家定制概况</span
+            >
+          </p>
         </div>
         <div class="data">
           <div>

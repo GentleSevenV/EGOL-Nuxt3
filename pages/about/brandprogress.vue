@@ -12,7 +12,7 @@
     <div class="container">
       <div class="page-title">
         <h2>发展历程</h2>
-        <p>21年行业深耕，专业值得信赖</p>
+        <p>多年行业深耕，专业值得信赖</p>
         <i></i>
       </div>
       <div class="progress-img">

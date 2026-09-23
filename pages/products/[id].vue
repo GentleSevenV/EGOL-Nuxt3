@@ -140,7 +140,7 @@
           </div>
         </div>
         <p class="intro-text">
-          我们是研发、设计、生产、销售、服务于一体全屋定制家居企业<br />先后荣获中国十大定制家居品牌、中国环境标志十环认证企业，全国工商联定制家居专委会副会长单位<br />致力为消费者提供360°全屋定制解决方案。
+          我们是研发、设计、生产、销售、服务于一体全屋定制家居企业<br />先后荣获专精特新企业、高新技术企业证书等<br />致力为消费者提供360°全屋定制解决方案。
         </p>
         <NuxtLink
           class="btn"
@@ -152,7 +152,7 @@
       </div>
       <div id="anchor-2" class="anchor-section">
         <div class="section-title">
-          <h2>21年实力厂家 铸就好品牌</h2>
+          <h2>多年实力厂家 铸就好品牌</h2>
           <p>
             易高整家定制始终坚持“专业环保定制，整家一体交付”，致力于中国定制家居文化的倡导和传播！
           </p>
@@ -334,7 +334,7 @@ const { data: productInfo } = await useFetch<DataResponse<IProductsInfo>>(
   `/open/products/info/info?id=${productId}`,
   {
     method: "get",
-  }
+  },
 );
 
 useHead({
