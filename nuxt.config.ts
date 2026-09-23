@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   features: {
     inlineStyles: false,
   },
-  modules: ["@element-plus/nuxt", "nuxt-swiper", "@nuxt/icon"],
+  modules: ["@element-plus/nuxt", "nuxt-swiper", "@nuxt/icon", "nuxt-echarts"],
   icon: {
     customCollections: [
       {
@@ -18,6 +18,11 @@ export default defineNuxtConfig({
         dir: "./assets/icons",
       },
     ],
+  },
+  echarts: {
+    renderer: ["canvas", "svg"],
+    charts: ["MapChart"],
+    components: ["TooltipComponent", "VisualMapComponent"],
   },
   css: ["~/assets/css/main.css", "element-plus/dist/index.css"],
   imports: {
@@ -38,20 +43,20 @@ export default defineNuxtConfig({
   // }
 
   // 伪静态处理：使用nuxt3提供的钩子函数'pages:extend'获取到页面路由被扫描之后生成的pages数组，然后修改页面路由不为'/'时，给其他所有路由添加.html结尾，之后在页面或者组件中进行路由跳转的时候记得也要带上.html结尾，否则会报错提示找不到路由。
-  hooks:{
-    'pages:extend'(pages){
-      pages.forEach((page)=>{
-        if (page.path !== '/') {
+  hooks: {
+    "pages:extend"(pages) {
+      pages.forEach((page) => {
+        if (page.path !== "/") {
           page.path = `${page.path}.html`;
         }
-      })
-    }
+      });
+    },
   },
-  app:{
-    head:{
-      htmlAttrs:{
-        lang:"zh-CN"
-      }
-    }
-  }
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: "zh-CN",
+      },
+    },
+  },
 });

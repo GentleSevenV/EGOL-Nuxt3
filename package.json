@@ -22,6 +22,7 @@
   "devDependencies": {
     "@element-plus/nuxt": "^1.1.1",
     "element-plus": "^2.9.5",
-    "less": "^4.2.1"
+    "less": "^4.2.1",
+    "nuxt-echarts": "^1.0.1"
   }
 }
